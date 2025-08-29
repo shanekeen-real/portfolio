@@ -22,6 +22,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { motion } from "framer-motion";
 import { projects } from "@/lib/data";
+import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
 
 const aboutStats = [
   { label: "Years of experience", value: "7+" },
@@ -205,13 +206,12 @@ export default function Home() {
           data-scroll-position="top"
           className="my-14 flex max-w-6xl flex-col justify-start space-y-10"
         >
-          <h2 className="py-16  pb-2 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]">
-            I&apos;m a UI/UX designer and full-stack developer with over 5 years
-            of experience creating digital products that users love. I specialize
-            in user-centered design and modern web development, working with companies from startups to
-            enterprise to bring their ideas to life through thoughtful design and
-            clean code.
-          </h2>
+          <TextGradientScroll 
+            text="I'm a UI/UX designer and full-stack developer with over 5 years of experience creating digital products that users love. I specialize in user-centered design and modern web development, working with companies from startups to enterprise to bring their ideas to life through thoughtful design and clean code."
+            className="py-16 pb-2 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]"
+            type="letter"
+            textOpacity="soft"
+          />
           <div className="grid grid-cols-2 gap-8 xl:grid-cols-3">
             {aboutStats.map((stat) => (
               <div
@@ -341,7 +341,7 @@ export default function Home() {
                   How I can help.
                 </span>
               </h2>
-              <p className="mt-2 tracking-tighter text-secondary-foreground">
+              <p className="mt-2 tracking-tighter text-muted-foreground">
                 I offer a comprehensive range of design and development services
                 to help bring your ideas to life. Here&apos;s what I specialize in.
               </p>
@@ -374,7 +374,7 @@ export default function Home() {
         >
           <h2 className="text-4xl font-medium tracking-tighter xl:text-6xl">
             Let&apos;s work{" "}
-            <span className="text-gradient clash-grotesk">together.</span>
+            <span className="text-gradient clash-grotesk text-4xl font-medium tracking-tighter xl:text-6xl">together.</span>
           </h2>
           <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
             I&apos;m currently available for freelance work and open to
