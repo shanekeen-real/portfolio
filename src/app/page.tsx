@@ -24,9 +24,9 @@ import { motion } from "framer-motion";
 import { projects } from "@/lib/data";
 
 const aboutStats = [
-  { label: "Years of experience", value: "5+" },
-  { label: "Projects completed", value: "25+" },
-  { label: "Companies worked with", value: "12+" },
+  { label: "Years of experience", value: "7+" },
+  { label: "Projects completed", value: "15+" },
+  { label: "Industries served", value: "4+" },
 ];
 
 const services = [
@@ -153,8 +153,7 @@ export default function Home() {
               data-scroll-speed=".06"
               className="mt-1 max-w-lg tracking-tight text-muted-foreground 2xl:text-xl"
             >
-              A UI/UX designer and full-stack developer passionate about creating
-              intuitive digital experiences that solve real problems.
+              A UI/UX designer passionate about creating intuitive digital experiences that solve real problems.
             </p>
           </div>
           <span
@@ -264,7 +263,7 @@ export default function Home() {
            <div className="mt-14">
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                {projects.map((project) => (
-                 <Card key={project.title} className="relative">
+                 <Card key={project.title}>
                    <CardHeader className="p-0">
                      <Link href={`/projects/${project.slug}`} passHref>
                        {project.coverImage.endsWith(".webm") ? (
@@ -287,28 +286,26 @@ export default function Home() {
                        )}
                      </Link>
                    </CardHeader>
-                   <CardContent className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
-                     <div className="border-t border-white/5 p-4">
-                       <CardTitle className="text-base font-normal tracking-tighter">
-                         {project.title}
-                       </CardTitle>
-                       <p className="mt-1 text-sm text-muted-foreground">
-                         {project.shortDescription}
-                       </p>
-                       <div className="mt-3 flex items-center justify-between">
-                         <Link href={`/projects/${project.slug}`} passHref>
-                           <Button variant="outline" size="sm">
-                             View Case Study
+                   <CardContent className="p-6">
+                     <CardTitle className="text-lg font-semibold tracking-tight">
+                       {project.title}
+                     </CardTitle>
+                     <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                       {project.shortDescription}
+                     </p>
+                     <div className="mt-6 flex items-center justify-between">
+                       <Link href={`/projects/${project.slug}`} passHref>
+                         <Button variant="outline" size="sm">
+                           View Case Study
+                         </Button>
+                       </Link>
+                       {project.externalLink && (
+                         <Link href={project.externalLink} target="_blank" passHref>
+                           <Button variant="ghost" size="sm">
+                             <ExternalLink className="h-4 w-4" />
                            </Button>
                          </Link>
-                         {project.externalLink && (
-                           <Link href={project.externalLink} target="_blank" passHref>
-                             <Button variant="ghost" size="sm">
-                               <ExternalLink className="h-4 w-4" />
-                             </Button>
-                           </Link>
-                         )}
-                       </div>
+                       )}
                      </div>
                    </CardContent>
                  </Card>

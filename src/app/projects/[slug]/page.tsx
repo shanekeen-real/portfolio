@@ -111,34 +111,18 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               {/* Tools */}
               <div className="flex flex-wrap gap-2">
                 {project.tools.map((tool) => (
-                  <Badge key={tool} variant="secondary" className="px-3 py-1 text-sm">
+                  <Badge key={tool} variant="default" className="px-3 py-1 text-sm">
                     {tool}
                   </Badge>
                 ))}
               </div>
 
               {/* Project Meta */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
-                <div className="flex items-center gap-3">
-                  <Building className="h-5 w-5 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Client</p>
-                    <p className="font-medium">{project.client}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <User className="h-5 w-5 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Role</p>
-                    <p className="font-medium">{project.role}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Calendar className="h-5 w-5 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Timeline</p>
-                    <p className="font-medium">{project.timeline}</p>
-                  </div>
+              <div className="flex items-center gap-3 pt-4">
+                <Calendar className="h-5 w-5 text-muted-foreground" />
+                <div>
+                  <p className="text-sm text-muted-foreground">Timeline</p>
+                  <p className="font-medium">{project.timeline}</p>
                 </div>
               </div>
             </div>
@@ -166,7 +150,6 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         <section className="space-y-8">
           <div className="space-y-4">
             <h2 className="text-3xl font-bold">The Problem</h2>
-            <div className="w-20 h-1 bg-primary rounded-full" />
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed">
             {project.problem}
@@ -177,7 +160,6 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         <section className="space-y-8">
           <div className="space-y-4">
             <h2 className="text-3xl font-bold">Research</h2>
-            <div className="w-20 h-1 bg-primary rounded-full" />
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed">
             {project.research.description}
@@ -204,7 +186,6 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         <section className="space-y-8">
           <div className="space-y-4">
             <h2 className="text-3xl font-bold">Concept</h2>
-            <div className="w-20 h-1 bg-primary rounded-full" />
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed">
             {project.concept.description}
@@ -231,7 +212,6 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         <section className="space-y-8">
           <div className="space-y-4">
             <h2 className="text-3xl font-bold">Iteration</h2>
-            <div className="w-20 h-1 bg-primary rounded-full" />
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed">
             {project.iteration.description}
@@ -258,7 +238,6 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         <section className="space-y-8">
           <div className="space-y-4">
             <h2 className="text-3xl font-bold">Final Product</h2>
-            <div className="w-20 h-1 bg-primary rounded-full" />
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed">
             {project.finalProduct.description}
@@ -285,7 +264,6 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         <section className="space-y-8">
           <div className="space-y-4">
             <h2 className="text-3xl font-bold">Outcome & Impact</h2>
-            <div className="w-20 h-1 bg-primary rounded-full" />
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed">
             {project.outcome.description}
