@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import { motion } from "framer-motion";
 
 interface ProjectPageProps {
   params: {
@@ -92,43 +93,82 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Content */}
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <h1 className="text-5xl lg:text-7xl font-bold tracking-tight">
+            <motion.div 
+              className="space-y-8"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <motion.div 
+                className="space-y-4"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+                >
+                  <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
+                    ✨ {project.subtitle}
+                  </span>
+                </motion.div>
+                <h1 className="text-4xl lg:text-5xl font-bold tracking-tight">
                   {project.title}
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
                   {project.fullDescription}
                 </p>
-              </div>
+              </motion.div>
 
               {/* Scope */}
-              <div className="space-y-3">
+              <motion.div 
+                className="space-y-3"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+              >
                 <h3 className="text-lg font-semibold text-muted-foreground">Scope</h3>
                 <p className="text-sm text-muted-foreground">{project.scope}</p>
-              </div>
+              </motion.div>
 
               {/* Tools */}
-              <div className="flex flex-wrap gap-2">
+              <motion.div 
+                className="flex flex-wrap gap-2"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+              >
                 {project.tools.map((tool) => (
-                  <Badge key={tool} variant="default" className="px-3 py-1 text-sm">
+                  <Badge key={tool} variant="outline" className="px-3 py-1 text-sm">
                     {tool}
                   </Badge>
                 ))}
-              </div>
+              </motion.div>
 
               {/* Project Meta */}
-              <div className="flex items-center gap-3 pt-4">
+              <motion.div 
+                className="flex items-center gap-3 pt-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+              >
                 <Calendar className="h-5 w-5 text-muted-foreground" />
                 <div>
                   <p className="text-sm text-muted-foreground">Timeline</p>
                   <p className="font-medium">{project.timeline}</p>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Hero Image */}
-            <div className="relative">
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            >
               <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-muted/20 to-muted/40 border border-border/50">
                 <Image
                   src={project.heroImage}
@@ -139,7 +179,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   priority
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -147,175 +187,420 @@ export default function ProjectPage({ params }: ProjectPageProps) {
       {/* Content Sections */}
       <div className="max-w-7xl mx-auto px-6 py-20 space-y-32">
         {/* Overview */}
-        <section className="space-y-8">
-          <div className="space-y-4">
+        <motion.section 
+          className="space-y-8"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
             <h2 className="text-3xl font-bold">The Problem</h2>
-          </div>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          </motion.div>
+          <motion.p 
+            className="text-lg text-muted-foreground leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          >
             {project.problem}
-          </p>
-        </section>
+          </motion.p>
+        </motion.section>
 
         {/* Research */}
-        <section className="space-y-8">
-          <div className="space-y-4">
+        <motion.section 
+          className="space-y-8"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
             <h2 className="text-3xl font-bold">Research</h2>
-          </div>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          </motion.div>
+          <motion.p 
+            className="text-lg text-muted-foreground leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          >
             {project.research.description}
-          </p>
+          </motion.p>
           {project.research.artifacts.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8">
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            >
               {project.research.artifacts.map((artifact, index) => (
-                <Card key={index} className="overflow-hidden border-border/50">
-                  <CardContent className="p-0">
-                    <ImageWithLightbox
-                      src={artifact}
-                      alt={`Research artifact ${index + 1}`}
-                      className="w-full h-64 object-cover"
-                      index={allImages.indexOf(artifact)}
-                    />
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-        </section>
-
-        {/* Concept */}
-        <section className="space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold">Concept</h2>
-          </div>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            {project.concept.description}
-          </p>
-          {project.concept.artifacts.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8">
-              {project.concept.artifacts.map((artifact, index) => (
-                <Card key={index} className="overflow-hidden border-border/50">
-                  <CardContent className="p-0">
-                    <ImageWithLightbox
-                      src={artifact}
-                      alt={`Concept artifact ${index + 1}`}
-                      className="w-full h-64 object-cover"
-                      index={allImages.indexOf(artifact)}
-                    />
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-        </section>
-
-        {/* Iteration */}
-        <section className="space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold">Iteration</h2>
-          </div>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            {project.iteration.description}
-          </p>
-          {project.iteration.artifacts.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8">
-              {project.iteration.artifacts.map((artifact, index) => (
-                <Card key={index} className="overflow-hidden border-border/50">
-                  <CardContent className="p-0">
-                    <ImageWithLightbox
-                      src={artifact}
-                      alt={`Iteration artifact ${index + 1}`}
-                      className="w-full h-48 object-cover"
-                      index={allImages.indexOf(artifact)}
-                    />
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-        </section>
-
-        {/* Final Product */}
-        <section className="space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold">Final Product</h2>
-          </div>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            {project.finalProduct.description}
-          </p>
-          {project.finalProduct.artifacts.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8">
-              {project.finalProduct.artifacts.map((artifact, index) => (
-                <Card key={index} className="overflow-hidden border-border/50">
-                  <CardContent className="p-0">
-                    <ImageWithLightbox
-                      src={artifact}
-                      alt={`Final product artifact ${index + 1}`}
-                      className="w-full h-48 object-cover"
-                      index={allImages.indexOf(artifact)}
-                    />
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-        </section>
-
-        {/* Outcome & Impact */}
-        <section className="space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold">Outcome & Impact</h2>
-          </div>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            {project.outcome.description}
-          </p>
-          
-          {project.outcome.metrics && project.outcome.metrics.length > 0 && (
-            <div className="pt-8">
-              <h3 className="text-xl font-semibold mb-6">Key Metrics</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {project.outcome.metrics.map((metric, index) => (
-                  <Card key={index} className="border-border/50 bg-muted/20">
-                    <CardContent className="p-6 text-center">
-                      <p className="text-sm text-muted-foreground leading-relaxed">{metric}</p>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
+                >
+                  <Card className="overflow-hidden border-border/50">
+                    <CardContent className="p-0">
+                      <ImageWithLightbox
+                        src={artifact}
+                        alt={`Research artifact ${index + 1}`}
+                        className="w-full h-64 object-cover"
+                        index={allImages.indexOf(artifact)}
+                      />
                     </CardContent>
                   </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </motion.section>
+
+        {/* Concept */}
+        <motion.section 
+          className="space-y-8"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
+            <h2 className="text-3xl font-bold">Concept</h2>
+          </motion.div>
+          <motion.p 
+            className="text-lg text-muted-foreground leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          >
+            {project.concept.description}
+          </motion.p>
+          {project.concept.artifacts.length > 0 && (
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            >
+              {project.concept.artifacts.map((artifact, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
+                >
+                  <Card className="overflow-hidden border-border/50">
+                    <CardContent className="p-0">
+                      <ImageWithLightbox
+                        src={artifact}
+                        alt={`Concept artifact ${index + 1}`}
+                        className="w-full h-64 object-cover"
+                        index={allImages.indexOf(artifact)}
+                      />
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </motion.section>
+
+        {/* Iteration */}
+        <motion.section 
+          className="space-y-8"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
+            <h2 className="text-3xl font-bold">Iteration</h2>
+          </motion.div>
+          <motion.p 
+            className="text-lg text-muted-foreground leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          >
+            {project.iteration.description}
+          </motion.p>
+          {project.iteration.artifacts.length > 0 && (
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            >
+              {project.iteration.artifacts.map((artifact, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
+                >
+                  <Card className="overflow-hidden border-border/50">
+                    <CardContent className="p-0">
+                      <ImageWithLightbox
+                        src={artifact}
+                        alt={`Iteration artifact ${index + 1}`}
+                        className="w-full h-48 object-cover"
+                        index={allImages.indexOf(artifact)}
+                      />
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </motion.section>
+
+        {/* Final Product */}
+        <motion.section 
+          className="space-y-8"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
+            <h2 className="text-3xl font-bold">Final Product</h2>
+          </motion.div>
+          <motion.p 
+            className="text-lg text-muted-foreground leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          >
+            {project.finalProduct.description}
+          </motion.p>
+          {project.finalProduct.artifacts.length > 0 && (
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            >
+              {project.finalProduct.artifacts.map((artifact, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
+                >
+                  <Card className="overflow-hidden border-border/50">
+                    <CardContent className="p-0">
+                      <ImageWithLightbox
+                        src={artifact}
+                        alt={`Final product artifact ${index + 1}`}
+                        className="w-full h-48 object-cover"
+                        index={allImages.indexOf(artifact)}
+                      />
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </motion.section>
+
+        {/* Outcome & Impact */}
+        <motion.section 
+          className="space-y-8"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
+            <h2 className="text-3xl font-bold">Outcome & Impact</h2>
+          </motion.div>
+          <motion.p 
+            className="text-lg text-muted-foreground leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          >
+            {project.outcome.description}
+          </motion.p>
+          
+          {project.outcome.metrics && project.outcome.metrics.length > 0 && (
+            <motion.div 
+              className="pt-8"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            >
+              <motion.h3 
+                className="text-xl font-semibold mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+              >
+                Key Metrics
+              </motion.h3>
+              <motion.div 
+                className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 1.0, ease: "easeOut" }}
+              >
+                {project.outcome.metrics.map((metric, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: 1.2 + index * 0.1, ease: "easeOut" }}
+                  >
+                    <Card className="border-border/50 bg-muted/20">
+                      <CardContent className="p-6 text-center">
+                        <p className="text-sm text-muted-foreground leading-relaxed">{metric}</p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           )}
 
-          <div className="pt-8">
-            <h3 className="text-xl font-semibold mb-6">Key Learnings</h3>
-            <ul className="space-y-4">
+          <motion.div 
+            className="pt-8"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+          >
+            <motion.h3 
+              className="text-xl font-semibold mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+            >
+              Key Learnings
+            </motion.h3>
+            <motion.ul 
+              className="space-y-4"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 1.0, ease: "easeOut" }}
+            >
               {project.outcome.learnings.map((learning, index) => (
-                <li key={index} className="flex items-start gap-4 p-4 rounded-lg bg-muted/30 border border-border/50">
+                <motion.li 
+                  key={index} 
+                  className="flex items-start gap-4 p-4 rounded-lg bg-muted/30 border border-border/50"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: 1.2 + index * 0.1, ease: "easeOut" }}
+                >
                   <div className="w-2 h-2 bg-primary rounded-full mt-3 flex-shrink-0" />
                   <span className="text-muted-foreground leading-relaxed">{learning}</span>
-                </li>
+                </motion.li>
               ))}
-            </ul>
-          </div>
-        </section>
+            </motion.ul>
+          </motion.div>
+        </motion.section>
 
         {/* Navigation */}
-        <section className="pt-16 border-t border-border/50">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-            <Link href="/#projects" passHref>
-              <Button variant="outline" className="gap-2">
-                <ArrowLeft className="h-4 w-4" />
-                Back to All Projects
-              </Button>
-            </Link>
-            {project.externalLink && (
-              <Link href={project.externalLink} target="_blank" passHref>
-                <Button className="gap-2">
-                  View Live Project
-                  <ExternalLink className="h-4 w-4" />
+        <motion.section 
+          className="pt-16 border-t border-border/50"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div 
+            className="flex flex-col sm:flex-row justify-between items-center gap-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            >
+              <Link href="/#projects" passHref>
+                <Button variant="outline" className="gap-2">
+                  <ArrowLeft className="h-4 w-4" />
+                  Back to All Projects
                 </Button>
               </Link>
+            </motion.div>
+            {project.externalLink && (
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+              >
+                <Link href={project.externalLink} target="_blank" passHref>
+                  <Button className="gap-2">
+                    View Live Project
+                    <ExternalLink className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </motion.div>
             )}
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
       </div>
 
       {/* Lightbox */}

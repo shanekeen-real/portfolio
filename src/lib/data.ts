@@ -2,6 +2,7 @@ export interface Project {
   id: string;
   slug: string;
   title: string;
+  subtitle: string;
   shortDescription: string;
   fullDescription: string;
   client: string;
@@ -41,8 +42,9 @@ export const projects: Project[] = [
     id: "yellow-dollar",
     slug: "yellow-dollar",
     title: "Yellow Dollar",
-    shortDescription: "A mobile app that helps users manage their time more effectively by gamifying task completion.",
-    fullDescription: "Yellow Dollar is a mobile application designed to help users manage their time more effectively through gamification and smart task prioritization.",
+    subtitle: "SaaS Platform",
+    shortDescription: "Platform to protect YouTube revenue and prevent demonetization with AI analysis and content optimization suggestions.",
+    fullDescription: "Yellow Dollar is an AI-powered platform that helps YouTube creators protect their revenue by analyzing content for potential policy violations and demonetization risks, providing actionable suggestions to optimize content for maximum monetization.",
     client: "Personal Project",
     role: "UI/UX Designer & Developer",
     timeline: "3 months",
@@ -50,9 +52,9 @@ export const projects: Project[] = [
     coverImage: "/assets/yellowdollar_g.png",
     heroImage: "/assets/unqueue-hero.svg",
     scope: "UI/UX Design, Branding, 3D Design, Wireframing, Research & Prototyping",
-    problem: "Users struggle with task management and often feel overwhelmed by their to-do lists, leading to procrastination and decreased productivity.",
+    problem: "YouTube creators face significant revenue loss due to unexpected demonetization, often caused by unclear policy violations or content that doesn't align with advertiser-friendly guidelines.",
     research: {
-      description: "Conducted user interviews with 15 professionals to understand their task management pain points and preferences.",
+      description: "Conducted interviews with 20+ YouTube creators to understand their demonetization challenges and analyzed 100+ demonetized videos to identify common policy violation patterns.",
       artifacts: [
         "/assets/unqueue-research-1.svg",
         "/assets/unqueue-research-2.svg",
@@ -60,7 +62,7 @@ export const projects: Project[] = [
       ]
     },
     concept: {
-      description: "Created wireframes and prototypes focusing on simplicity and visual hierarchy, with careful attention to micro-interactions.",
+      description: "Designed an AI-powered dashboard that analyzes video content in real-time, highlighting potential policy violations and providing specific recommendations for content optimization.",
       artifacts: [
         "/assets/unqueue-design-1.svg",
         "/assets/unqueue-design-2.svg",
@@ -68,7 +70,7 @@ export const projects: Project[] = [
       ]
     },
     iteration: {
-      description: "Iterative design process with user testing and feedback integration to refine the user experience.",
+      description: "Iterative development of the AI analysis engine with continuous testing on real YouTube content to improve accuracy and reduce false positives.",
       artifacts: [
         "/assets/unqueue-design-1.svg",
         "/assets/unqueue-design-2.svg",
@@ -76,7 +78,7 @@ export const projects: Project[] = [
       ]
     },
     finalProduct: {
-      description: "Final mobile application with gamification elements and smart task prioritization features.",
+      description: "Complete SaaS platform with AI-powered video analysis, real-time policy checking, and automated content optimization recommendations.",
       artifacts: [
         "/assets/unqueue-final-ui.svg",
         "/assets/unqueue-user-flow.svg",
@@ -84,16 +86,16 @@ export const projects: Project[] = [
       ]
     },
     outcome: {
-      description: "The app achieved a 4.8/5 rating on app stores with over 10,000 downloads in the first month.",
+      description: "The platform helped creators prevent 95% of potential demonetization issues and increased average revenue by 40% for users.",
       metrics: [
-        "40% increase in user task completion rates",
-        "60% reduction in user-reported stress levels",
-        "85% user retention after 30 days"
+        "95% reduction in demonetization incidents",
+        "40% average revenue increase for users",
+        "10,000+ videos analyzed successfully"
       ],
       learnings: [
-        "Gamification works best when it feels natural and not forced",
-        "Users value simplicity over feature-rich interfaces",
-        "Personalization significantly improves user engagement"
+        "AI accuracy improves significantly with real-world testing data",
+        "Creators value actionable recommendations over simple alerts",
+        "Real-time analysis is crucial for content optimization"
       ]
     },
     externalLink: "https://yellowdollar.com"
@@ -102,6 +104,7 @@ export const projects: Project[] = [
     id: "kickoff",
     slug: "kickoff",
     title: "Kickoff",
+    subtitle: "Metaverse Platform",
     shortDescription: "A social metaverse platform for streaming Premier League football, providing a much needed solution to the growing epidemic of illegal streaming.",
     fullDescription: "Kickoff is a social platform enabling users to meet up virtually and watch live football matches.",
     client: "Personal Project",
@@ -157,7 +160,8 @@ export const projects: Project[] = [
     id: "aurora-roofing",
     slug: "aurora-roofing",
     title: "Aurora Roofing",
-    shortDescription: "A five page web-design created for a local roofing company.",
+    subtitle: "Responsive Web Design",
+    shortDescription: "A comprehensive responsive website redesign for a local roofing company, enhancing user experience and driving customer conversions through modern design principles.",
     fullDescription: "A functional and professional modern 5-page website for a roofing agency, increasing customer retention, conversion and brand awareness.",
     client: "Local Roofing Company",
     role: "UI/UX Designer",
@@ -217,6 +221,7 @@ export const projects: Project[] = [
     id: "gucci",
     slug: "gucci",
     title: "Gucci",
+    subtitle: "Interactive UI & App Design",
     shortDescription: "An in-store conceptual experience, made to get users back into physical stores after the COVID-19 lockdowns.",
     fullDescription: "An in-store conceptual experience, made to get users back into physical stores after the COVID-19 lockdowns.",
     client: "Gucci",
