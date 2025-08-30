@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'light' | 'dark' | 'system';
+type Theme = 'light' | 'dark';
 
 interface ThemeContextType {
   theme: Theme;
@@ -13,8 +13,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('system');
-  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('dark');
+  const [theme, setTheme] = useState<Theme>('dark');
 
   useEffect(() => {
     // Load theme from localStorage
@@ -25,44 +24,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    // Determine resolved theme
-    const getResolvedTheme = (): 'light' | 'dark' => {
-      if (theme === 'system') {
-        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      }
-      return theme;
-    };
-
-    const newResolvedTheme = getResolvedTheme();
-    setResolvedTheme(newResolvedTheme);
-
     // Apply theme to document
     const root = document.documentElement;
     root.classList.remove('light', 'dark');
-    root.classList.add(newResolvedTheme);
+    root.classList.add(theme);
 
     // Save to localStorage
     localStorage.setItem('theme', theme);
-
-    // Listen for system theme changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
-    const handleChange = () => {
-      if (theme === 'system') {
-        const newTheme = getResolvedTheme();
-        setResolvedTheme(newTheme);
-        root.classList.remove('light', 'dark');
-        root.classList.add(newTheme);
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
   }, [theme]);
 
   const value = {
     theme,
     setTheme,
-    resolvedTheme,
+    resolvedTheme: theme,
   };
 
   return (
