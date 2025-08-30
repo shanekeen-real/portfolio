@@ -172,7 +172,7 @@ export default function Home() {
               variant="outline"
               onClick={() => window.open('/CV 2025 Shane Keen v3.docx.pdf', '_blank')}
             >
-              Download Resume
+              View Resumé
             </Button>
           </span>
 
@@ -390,7 +390,7 @@ export default function Home() {
               variant="outline"
               onClick={() => window.open('/CV 2025 Shane Keen v3.docx.pdf', '_blank')}
             >
-              Download Resume
+              View Resumé
             </Button>
           </div>
         </div>
