@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 import { usePathname } from "next/navigation";
 import styles from "@/styles/Container.module.css";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 type IconProps = {
   ["data-hide"]: boolean;
@@ -138,6 +139,9 @@ export default function AppContainer(props: ContainerProps) {
               className="text-base"
             />
           ))}
+          <li className="ml-4">
+            <ThemeToggle />
+          </li>
         </ul>
 
         {/* Mobile menu */}
@@ -176,6 +180,9 @@ export default function AppContainer(props: ContainerProps) {
                       />
                     </button>
                   ))}
+                  <li className="mt-4">
+                    <ThemeToggle />
+                  </li>
                 </ul>
 
                 {/* Footer */}

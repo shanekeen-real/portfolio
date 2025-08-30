@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import "@/styles/clash-grotesk.css";
 import "@/styles/locomotive-scroll.css";
 import AppContainer from "@/components/AppContainer";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -59,9 +60,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
-        <AppContainer>
-          {children}
-        </AppContainer>
+        <ThemeProvider>
+          <AppContainer>
+            {children}
+          </AppContainer>
+        </ThemeProvider>
       </body>
     </html>
   );
