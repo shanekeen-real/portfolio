@@ -5,6 +5,7 @@ import "@/styles/clash-grotesk.css";
 import "@/styles/locomotive-scroll.css";
 import AppContainer from "@/components/AppContainer";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { PageTransition } from "@/components/PageTransition";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -62,7 +63,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider>
           <AppContainer>
-            {children}
+            <PageTransition>
+              {children}
+            </PageTransition>
           </AppContainer>
         </ThemeProvider>
       </body>

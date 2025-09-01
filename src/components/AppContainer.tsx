@@ -105,7 +105,7 @@ export default function AppContainer(props: ContainerProps) {
         className={cn(
           styles.nav,
           isScrolled
-            ? "bg-gradient-to-br from-background to-transparent shadow-md backdrop-blur transition"
+            ? "bg-gradient-to-br from-background to-transparent border-b border-border backdrop-blur transition"
             : "bg-transparent",
         )}
       >

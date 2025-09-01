@@ -23,11 +23,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { projects } from "@/lib/data";
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
+import { ProjectCard } from "@/components/ProjectCard";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { Counter } from "@/components/ui/counter";
+import { CustomCursor } from "@/components/CustomCursor";
 
 const aboutStats = [
-  { label: "Years of experience", value: "7+" },
-  { label: "Projects completed", value: "15+" },
-  { label: "Industries served", value: "4+" },
+  { label: "Years of experience", value: 7, suffix: "+" },
+  { label: "Projects completed", value: 15, suffix: "+" },
+  { label: "Industries served", value: 4, suffix: "+" },
 ];
 
 const services = [
@@ -114,6 +118,8 @@ export default function Home() {
 
   return (
     <div ref={refScrollContainer}>
+      <CustomCursor />
+      <ScrollProgress />
       <Gradient />
 
       {/* Intro */}
@@ -213,18 +219,38 @@ export default function Home() {
             textOpacity="soft"
           />
           <div className="grid grid-cols-2 gap-8 xl:grid-cols-3">
-            {aboutStats.map((stat) => (
-              <div
+            {aboutStats.map((stat, index) => (
+              <motion.div
                 key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.2,
+                  ease: "easeOut" 
+                }}
+                viewport={{ once: true }}
                 className="flex flex-col items-center text-center xl:items-start xl:text-start"
               >
-                <span className="clash-grotesk text-gradient text-4xl font-semibold tracking-tight xl:text-6xl">
-                  {stat.value}
-                </span>
-                <span className="tracking-tight text-muted-foreground xl:text-lg">
+                <Counter
+                  end={stat.value}
+                  suffix={stat.suffix}
+                  className="clash-grotesk text-gradient text-4xl font-semibold tracking-tight xl:text-6xl"
+                />
+                <motion.span 
+                  className="tracking-tight text-muted-foreground xl:text-lg"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ 
+                    duration: 0.4, 
+                    delay: index * 0.2 + 0.5,
+                    ease: "easeOut" 
+                  }}
+                  viewport={{ once: true }}
+                >
                   {stat.label}
-                </span>
-              </div>
+                </motion.span>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -259,53 +285,8 @@ export default function Home() {
                      {/* Projects Grid */}
            <div className="mt-14">
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-               {projects.map((project) => (
-                 <Card key={project.title}>
-                   <CardHeader className="p-0">
-                     <Link href={`/projects/${project.slug}`} passHref>
-                       {project.coverImage.endsWith(".webm") ? (
-                         <video
-                           src={project.coverImage}
-                           autoPlay
-                           loop
-                           muted
-                           className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
-                         />
-                       ) : (
-                         <Image
-                           src={project.coverImage}
-                           alt={project.title}
-                           width={600}
-                           height={300}
-                           quality={100}
-                           className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
-                         />
-                       )}
-                     </Link>
-                   </CardHeader>
-                   <CardContent className="p-6">
-                     <CardTitle className="text-lg font-semibold tracking-tight">
-                       {project.title}
-                     </CardTitle>
-                     <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                       {project.shortDescription}
-                     </p>
-                     <div className="mt-6 flex items-center justify-between">
-                       <Link href={`/projects/${project.slug}`} passHref>
-                         <Button variant="outline" size="sm">
-                           View Case Study
-                         </Button>
-                       </Link>
-                       {project.externalLink && (
-                         <Link href={project.externalLink} target="_blank" passHref>
-                           <Button variant="ghost" size="sm">
-                             <ExternalLink className="h-4 w-4" />
-                           </Button>
-                         </Link>
-                       )}
-                     </div>
-                   </CardContent>
-                 </Card>
+               {projects.map((project, index) => (
+                 <ProjectCard key={project.title} project={project} />
                ))}
              </div>
            </div>
@@ -314,6 +295,21 @@ export default function Home() {
 
       {/* Services */}
       <section id="services" data-scroll-section>
+        {/* Background Blob */}
+        <div className="relative isolate -z-10">
+          <div
+            className="absolute right-0 top-3/4 transform-gpu overflow-hidden blur-[100px]"
+            aria-hidden="true"
+          >
+            <div
+              className="relative aspect-[1155/678] w-[36.125rem] rotate-[30deg] bg-gradient-to-tr from-secondary via-primary to-secondary opacity-20 sm:w-[72.1875rem]"
+              style={{
+                clipPath:
+                  "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+              }}
+            />
+          </div>
+        </div>
         <div
           data-scroll
           data-scroll-speed=".4"
@@ -346,7 +342,7 @@ export default function Home() {
             {services.map((service) => (
               <div
                 key={service.service}
-                className="flex flex-col items-start rounded-md bg-white/5 p-14 shadow-md backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-md"
+                className="flex flex-col items-start rounded-md bg-white/5 p-14 backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 border border-border"
               >
                 <service.icon className="my-6 text-primary" size={20} />
                 <span className="text-lg tracking-tight text-foreground">
