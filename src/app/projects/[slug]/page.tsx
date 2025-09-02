@@ -7,13 +7,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, ExternalLink, Maximize2, Calendar, User, Building } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CustomLightbox } from "@/components/CustomLightbox";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { CustomCursor } from "@/components/CustomCursor";
 import { EnhancedImageGallery } from "@/components/EnhancedImageGallery";
 import { ContentTabs } from "@/components/ContentTabs";
+import { LoadingPage } from "@/components/LoadingAnimation";
 
 interface ProjectPageProps {
   params: {
@@ -23,6 +24,7 @@ interface ProjectPageProps {
 
 export default function ProjectPage({ params }: ProjectPageProps) {
   const project = getProjectBySlug(params.slug);
+  
   if (!project) {
     notFound();
   }
@@ -36,10 +38,24 @@ export default function ProjectPage({ params }: ProjectPageProps) {
     ...project.finalProduct.artifacts,
   ].filter(Boolean);
 
+  const [isLoading, setIsLoading] = useState(true);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [sectionImages, setSectionImages] = useState<string[]>(allImages);
   const { scrollYProgress } = useScroll();
+  
+  // Move all useTransform calls to the top level
+  const parallaxRight = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const parallaxLeft = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  
+  useEffect(() => {
+    // Simulate a brief loading state for better UX
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const openLightbox = (index: number, sectionImages?: string[]) => {
     setLightboxIndex(index);
@@ -51,6 +67,11 @@ export default function ProjectPage({ params }: ProjectPageProps) {
       setSectionImages(allImages);
     }
   };
+
+  // Show loading state after all hooks have been called
+  if (isLoading) {
+    return <LoadingPage text="Loading case study..." />;
+  }
 
   const ImageWithLightbox = ({ 
     src, 
@@ -306,13 +327,13 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           <motion.div
             className="absolute top-1/4 right-0 w-64 h-64 bg-gradient-to-br from-primary/3 to-secondary/3 rounded-full blur-3xl"
             style={{
-              y: useTransform(scrollYProgress, [0, 1], [0, -100])
+              y: parallaxRight
             }}
           />
           <motion.div
             className="absolute bottom-1/4 left-0 w-48 h-48 bg-gradient-to-tr from-primary/2 to-secondary/2 rounded-full blur-3xl"
             style={{
-              y: useTransform(scrollYProgress, [0, 1], [0, 80])
+              y: parallaxLeft
             }}
           />
         </motion.div>

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { LoadingSpinner } from "@/components/LoadingAnimation";
 import { ExternalLink } from "lucide-react";
 import { useTilt } from "@/hooks/useTilt";
 import { Project } from "@/lib/data";
@@ -19,6 +19,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
   const { resolvedTheme } = useTheme();
   const tiltRef = useTilt({
     max: 2,
@@ -26,6 +27,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
     speed: 1000,
     glare: false,
   });
+
+  const handleCaseStudyClick = () => {
+    setIsNavigating(true);
+  };
 
   return (
     <motion.div
@@ -43,9 +48,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <CardHeader className="p-0">
           <Link href={`/projects/${project.slug}`} passHref>
             <div className="relative overflow-hidden">
-              {/* Skeleton Loading */}
+              {/* Loading Animation */}
               {!imageLoaded && (
-                <Skeleton className="aspect-video w-full" />
+                <div className="aspect-video w-full flex items-center justify-center bg-muted/20">
+                  <LoadingSpinner size="lg" />
+                </div>
               )}
               
               {/* Project Image */}
@@ -89,12 +96,20 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </p>
           
           <div className="flex items-center justify-between">
-            <Link href={`/projects/${project.slug}`} passHref>
+            <Link href={`/projects/${project.slug}`} passHref onClick={handleCaseStudyClick}>
               <Button 
                 variant="outline" 
                 className="transition-all duration-200"
+                disabled={isNavigating}
               >
-                View Case Study
+                {isNavigating ? (
+                  <>
+                    <LoadingSpinner size="sm" />
+                    <span className="ml-2">Loading...</span>
+                  </>
+                ) : (
+                  "View Case Study"
+                )}
               </Button>
             </Link>
             
