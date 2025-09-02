@@ -8,11 +8,12 @@ import { ArrowLeft, ExternalLink, Maximize2, Calendar, User, Building } from "lu
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
-import { motion } from "framer-motion";
+import { CustomLightbox } from "@/components/CustomLightbox";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { CustomCursor } from "@/components/CustomCursor";
+import { EnhancedImageGallery } from "@/components/EnhancedImageGallery";
+import { ContentTabs } from "@/components/ContentTabs";
 
 interface ProjectPageProps {
   params: {
@@ -22,9 +23,6 @@ interface ProjectPageProps {
 
 export default function ProjectPage({ params }: ProjectPageProps) {
   const project = getProjectBySlug(params.slug);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-
   if (!project) {
     notFound();
   }
@@ -38,9 +36,20 @@ export default function ProjectPage({ params }: ProjectPageProps) {
     ...project.finalProduct.artifacts,
   ].filter(Boolean);
 
-  const openLightbox = (index: number) => {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [sectionImages, setSectionImages] = useState<string[]>(allImages);
+  const { scrollYProgress } = useScroll();
+
+  const openLightbox = (index: number, sectionImages?: string[]) => {
     setLightboxIndex(index);
     setLightboxOpen(true);
+    // If section-specific images are provided, use those instead of all images
+    if (sectionImages) {
+      setSectionImages(sectionImages);
+    } else {
+      setSectionImages(allImages);
+    }
   };
 
   const ImageWithLightbox = ({ 
@@ -97,8 +106,55 @@ export default function ProjectPage({ params }: ProjectPageProps) {
       <ScrollProgress />
 
       {/* Hero Section - Enhanced Typography & Spacing */}
-      <section className="relative bg-gradient-to-br from-background via-background to-muted/20">
-        <div className="max-w-7xl mx-auto px-6 pt-40 pb-32">
+      <section className="relative bg-gradient-to-br from-background via-background to-muted/20 overflow-hidden">
+        {/* Parallax Background Elements */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <motion.div
+            className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl"
+            animate={{
+              y: [0, -20, 0],
+              x: [0, 10, 0],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute top-40 right-20 w-24 h-24 bg-secondary/5 rounded-full blur-3xl"
+            animate={{
+              y: [0, 15, 0],
+              x: [0, -15, 0],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+          />
+          <motion.div
+            className="absolute bottom-40 left-1/4 w-20 h-20 bg-primary/3 rounded-full blur-3xl"
+            animate={{
+              y: [0, -10, 0],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 4
+            }}
+          />
+        </motion.div>
+        
+        <div className="max-w-7xl mx-auto px-6 pt-40 pb-32 relative z-10">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             {/* Content */}
             <motion.div 
@@ -148,13 +204,31 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
               >
-                {project.tools.map((tool) => (
-                  <span
+                {project.tools.map((tool, index) => (
+                  <motion.span
                     key={tool}
-                    className="transition border border-input bg-background flex items-center text-xs px-2.5 py-1.5 rounded-full hover:-translate-y-1 hover:bg-primary hover:text-primary-foreground duration-300"
+                    className="transition border border-input bg-background flex items-center text-xs px-2.5 py-1.5 rounded-full hover:bg-primary hover:text-primary-foreground duration-300 cursor-pointer"
+                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: 0.6 + index * 0.1,
+                      type: "spring",
+                      stiffness: 200
+                    }}
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -3,
+                      rotate: [0, -2, 2, 0],
+                      transition: { 
+                        duration: 0.3,
+                        rotate: { duration: 0.6, repeat: Infinity, repeatType: "reverse" }
+                      }
+                    }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     {tool}
-                  </span>
+                  </motion.span>
                 ))}
               </motion.div>
 
@@ -171,16 +245,32 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   <p className="font-medium text-base">{project.timeline}</p>
                 </div>
               </motion.div>
+
+
             </motion.div>
 
             {/* Hero Image */}
             <motion.div 
-              className="relative"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
+              className="relative group"
+              initial={{ opacity: 0, x: 50, rotateY: 15 }}
+              animate={{ opacity: 1, x: 0, rotateY: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              whileHover={{ 
+                rotateY: -5,
+                transition: { duration: 0.3 }
+              }}
             >
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-muted/20 to-muted/40 border border-border/50">
+              <motion.div 
+                className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-muted/20 to-muted/40 border border-border/50 shadow-2xl"
+                style={{
+                  transformStyle: "preserve-3d",
+                  perspective: "1000px"
+                }}
+                whileHover={{ 
+                  scale: 1.02,
+                  transition: { duration: 0.3 }
+                }}
+              >
                 <Image
                   src={project.heroImage}
                   alt={project.title}
@@ -189,14 +279,43 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   className="w-full h-full object-cover"
                   priority
                 />
-              </div>
+                
+                {/* Subtle 3D Glow Effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    transform: "translateZ(20px)"
+                  }}
+                />
+              </motion.div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Content Sections - Enhanced Typography & Spacing */}
-      <div className="max-w-7xl mx-auto px-6 py-24 space-y-40">
+      <div className="max-w-7xl mx-auto px-6 py-24 space-y-40 relative">
+        {/* Subtle Parallax Background */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 2 }}
+        >
+          <motion.div
+            className="absolute top-1/4 right-0 w-64 h-64 bg-gradient-to-br from-primary/3 to-secondary/3 rounded-full blur-3xl"
+            style={{
+              y: useTransform(scrollYProgress, [0, 1], [0, -100])
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 left-0 w-48 h-48 bg-gradient-to-tr from-primary/2 to-secondary/2 rounded-full blur-3xl"
+            style={{
+              y: useTransform(scrollYProgress, [0, 1], [0, 80])
+            }}
+          />
+        </motion.div>
         {/* Overview */}
         <motion.section 
           id="problem"
@@ -255,32 +374,22 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </motion.p>
           {project.research.artifacts.length > 0 && (
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12"
+              className="pt-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             >
-              {project.research.artifacts.map((artifact, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
-                >
-                  <Card className="overflow-hidden border-border/50 hover:border-border/80 transition-all duration-300 hover:bg-muted/20">
-                    <CardContent className="p-0">
-                      <ImageWithLightbox
-                        src={artifact}
-                        alt={`Research artifact ${index + 1}`}
-                        className="w-full h-64 object-cover"
-                        index={allImages.indexOf(artifact)}
-                      />
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+              <EnhancedImageGallery
+                images={project.research.artifacts}
+                alt="Research artifacts"
+                onImageClick={(index) => {
+                  openLightbox(index, project.research.artifacts);
+                }}
+                showThumbnails={true}
+                autoPlay={false}
+                sectionId="research"
+              />
             </motion.div>
           )}
         </motion.section>
@@ -314,32 +423,22 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </motion.p>
           {project.concept.artifacts.length > 0 && (
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12"
+              className="pt-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             >
-              {project.concept.artifacts.map((artifact, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
-                >
-                  <Card className="overflow-hidden border-border/50 hover:border-border/80 transition-all duration-300 hover:bg-muted/20">
-                    <CardContent className="p-0">
-                      <ImageWithLightbox
-                        src={artifact}
-                        alt={`Concept artifact ${index + 1}`}
-                        className="w-full h-64 object-cover"
-                        index={allImages.indexOf(artifact)}
-                      />
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+              <EnhancedImageGallery
+                images={project.concept.artifacts}
+                alt="Concept artifacts"
+                onImageClick={(index) => {
+                  openLightbox(index, project.concept.artifacts);
+                }}
+                showThumbnails={true}
+                autoPlay={false}
+                sectionId="concept"
+              />
             </motion.div>
           )}
         </motion.section>
@@ -373,32 +472,22 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </motion.p>
           {project.iteration.artifacts.length > 0 && (
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-12"
+              className="pt-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             >
-              {project.iteration.artifacts.map((artifact, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
-                >
-                  <Card className="overflow-hidden border-border/50 hover:border-border/80 transition-all duration-300 hover:bg-muted/20">
-                    <CardContent className="p-0">
-                      <ImageWithLightbox
-                        src={artifact}
-                        alt={`Iteration artifact ${index + 1}`}
-                        className="w-full h-48 object-cover"
-                        index={allImages.indexOf(artifact)}
-                      />
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+              <EnhancedImageGallery
+                images={project.iteration.artifacts}
+                alt="Iteration artifacts"
+                onImageClick={(index) => {
+                  openLightbox(index, project.iteration.artifacts);
+                }}
+                showThumbnails={true}
+                autoPlay={false}
+                sectionId="iteration"
+              />
             </motion.div>
           )}
         </motion.section>
@@ -432,32 +521,22 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </motion.p>
           {project.finalProduct.artifacts.length > 0 && (
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-12"
+              className="pt-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             >
-              {project.finalProduct.artifacts.map((artifact, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
-                >
-                  <Card className="overflow-hidden border-border/50 hover:border-border/80 transition-all duration-300 hover:bg-muted/20">
-                    <CardContent className="p-0">
-                      <ImageWithLightbox
-                        src={artifact}
-                        alt={`Final product artifact ${index + 1}`}
-                        className="w-full h-48 object-cover"
-                        index={allImages.indexOf(artifact)}
-                      />
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+              <EnhancedImageGallery
+                images={project.finalProduct.artifacts}
+                alt="Final product artifacts"
+                onImageClick={(index) => {
+                  openLightbox(index, project.finalProduct.artifacts);
+                }}
+                showThumbnails={true}
+                autoPlay={false}
+                sectionId="final-product"
+              />
             </motion.div>
           )}
         </motion.section>
@@ -490,48 +569,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             {project.outcome.description}
           </motion.p>
           
-          {project.outcome.metrics && project.outcome.metrics.length > 0 && (
-            <motion.div 
-              className="pt-12"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            >
-              <motion.h3 
-                className="text-2xl font-semibold mb-8"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
-              >
-                Key Metrics
-              </motion.h3>
-              <motion.div 
-                className="grid grid-cols-1 md:grid-cols-3 gap-6"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: 1.0, ease: "easeOut" }}
-              >
-                {project.outcome.metrics.map((metric, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6, delay: 1.2 + index * 0.1, ease: "easeOut" }}
-                  >
-                    <Card className="border-border/50 bg-muted/20 hover:bg-muted/30 transition-all duration-300 hover:border-border/80">
-                      <CardContent className="p-8 text-center">
-                        <p className="text-base text-muted-foreground leading-relaxed">{metric}</p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-          )}
+
 
           <motion.div 
             className="pt-12"
@@ -559,14 +597,49 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               {project.outcome.learnings.map((learning, index) => (
                 <motion.li 
                   key={index} 
-                  className="flex items-start gap-6 p-6 rounded-lg bg-muted/30 border border-border/50 hover:bg-muted/40 hover:border-border/80 transition-all duration-300"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  className="flex items-start gap-6 p-6 rounded-lg bg-muted/30 border border-border/50 hover:bg-muted/40 hover:border-border/80 transition-all duration-300 group"
+                  initial={{ opacity: 0, y: 30, x: -20 }}
+                  whileInView={{ opacity: 1, y: 0, x: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: 1.2 + index * 0.1, ease: "easeOut" }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: 1.2 + index * 0.15, 
+                    ease: "easeOut",
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 15
+                  }}
+                  whileHover={{ 
+                    y: -2, 
+                    x: 5,
+                    scale: 1.02,
+                    transition: { duration: 0.2 }
+                  }}
                 >
-                  <div className="w-3 h-3 bg-primary rounded-full mt-3 flex-shrink-0" />
-                  <span className="text-base text-muted-foreground leading-relaxed">{learning}</span>
+                  <motion.div 
+                    className="w-3 h-3 bg-primary rounded-full mt-3 flex-shrink-0"
+                    initial={{ scale: 0, rotate: -180 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: 1.4 + index * 0.15,
+                      type: "spring",
+                      stiffness: 200
+                    }}
+                  />
+                  <motion.span 
+                    className="text-base text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors duration-300"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: 1.6 + index * 0.15 
+                    }}
+                  >
+                    {learning}
+                  </motion.span>
                 </motion.li>
               ))}
             </motion.ul>
@@ -607,12 +680,12 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         </motion.section>
       </div>
 
-      {/* Lightbox */}
-      <Lightbox
-        open={lightboxOpen}
-        close={() => setLightboxOpen(false)}
-        index={lightboxIndex}
-        slides={allImages.map((src) => ({ src }))}
+      {/* Custom Lightbox */}
+      <CustomLightbox
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        images={sectionImages}
+        initialIndex={lightboxIndex}
       />
     </div>
   );

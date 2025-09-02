@@ -1,0 +1,8 @@
+public/service-worker.js
+public/workbox-4754cb34.js
+src/app/page.tsx
+src/app/projects/[slug]/page.tsx
+src/components/AppContainer.tsx
+src/components/CustomCursor.tsx
+src/components/ProjectCard.tsx
+tatus
