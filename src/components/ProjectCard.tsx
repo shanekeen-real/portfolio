@@ -37,7 +37,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       className="group"
     >
       <Card className={cn(
-        "overflow-hidden transition-all duration-300",
+        "overflow-hidden transition-all duration-300 border-border/50 hover:border-primary/60 hover:bg-muted/20",
         resolvedTheme === 'dark' ? "hover:shadow-lg" : ""
       )}>
         <CardHeader className="p-0">
@@ -92,7 +92,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <Link href={`/projects/${project.slug}`} passHref>
               <Button 
                 variant="outline" 
-                className="transition-all duration-200 hover:scale-105"
+                className="transition-all duration-200"
               >
                 View Case Study
               </Button>

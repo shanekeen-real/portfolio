@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { getProjectBySlug } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, ExternalLink, Maximize2, Calendar, User, Building } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,6 +11,8 @@ import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { motion } from "framer-motion";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { CustomCursor } from "@/components/CustomCursor";
 
 interface ProjectPageProps {
   params: {
@@ -67,7 +68,20 @@ export default function ProjectPage({ params }: ProjectPageProps) {
       />
       <button
         onClick={() => openLightbox(index)}
-        className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+        className="absolute top-4 right-4 bg-black/50 hover:bg-primary text-white hover:text-primary-foreground p-2 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 z-10"
+        onMouseEnter={(e) => {
+          const image = e.currentTarget.previousElementSibling as HTMLElement;
+          if (image) {
+            image.style.transform = 'scale(1.1)';
+            image.style.transition = 'transform 0.5s ease';
+          }
+        }}
+        onMouseLeave={(e) => {
+          const image = e.currentTarget.previousElementSibling as HTMLElement;
+          if (image) {
+            image.style.transform = 'scale(1)';
+          }
+        }}
       >
         <Maximize2 className="h-4 w-4" />
       </button>
@@ -76,31 +90,25 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation Bar */}
-      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/40">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <Link href="/#projects" passHref>
-            <Button variant="ghost" className="gap-2 text-muted-foreground hover:text-foreground">
-              <ArrowLeft className="h-4 w-4" />
-              Back to Projects
-            </Button>
-          </Link>
-        </div>
-      </div>
+      {/* Custom Cursor */}
+      <CustomCursor />
+      
+      {/* Scroll Progress Bar */}
+      <ScrollProgress />
 
-      {/* Hero Section - Clean & Modern */}
+      {/* Hero Section - Enhanced Typography & Spacing */}
       <section className="relative bg-gradient-to-br from-background via-background to-muted/20">
-        <div className="max-w-7xl mx-auto px-6 py-20">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-6 pt-40 pb-32">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             {/* Content */}
             <motion.div 
-              className="space-y-8"
+              className="space-y-10"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <motion.div 
-                className="space-y-4"
+                className="space-y-6"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -114,7 +122,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     ✨ {project.subtitle}
                   </span>
                 </motion.div>
-                <h1 className="text-4xl lg:text-5xl font-bold tracking-tight">
+                <h1 className="text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
                   {project.title}
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
@@ -124,32 +132,35 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
               {/* Scope */}
               <motion.div 
-                className="space-y-3"
+                className="space-y-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
               >
                 <h3 className="text-lg font-semibold text-muted-foreground">Scope</h3>
-                <p className="text-sm text-muted-foreground">{project.scope}</p>
+                <p className="text-base text-muted-foreground leading-relaxed">{project.scope}</p>
               </motion.div>
 
               {/* Tools */}
               <motion.div 
-                className="flex flex-wrap gap-2"
+                className="flex flex-wrap gap-3"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
               >
                 {project.tools.map((tool) => (
-                  <Badge key={tool} variant="outline" className="px-3 py-1 text-sm">
+                  <span
+                    key={tool}
+                    className="transition border border-input bg-background flex items-center text-xs px-2.5 py-1.5 rounded-full hover:-translate-y-1 hover:bg-primary hover:text-primary-foreground duration-300"
+                  >
                     {tool}
-                  </Badge>
+                  </span>
                 ))}
               </motion.div>
 
               {/* Project Meta */}
               <motion.div 
-                className="flex items-center gap-3 pt-4"
+                className="flex items-center gap-4 pt-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
@@ -157,7 +168,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 <Calendar className="h-5 w-5 text-muted-foreground" />
                 <div>
                   <p className="text-sm text-muted-foreground">Timeline</p>
-                  <p className="font-medium">{project.timeline}</p>
+                  <p className="font-medium text-base">{project.timeline}</p>
                 </div>
               </motion.div>
             </motion.div>
@@ -184,27 +195,28 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         </div>
       </section>
 
-      {/* Content Sections */}
-      <div className="max-w-7xl mx-auto px-6 py-20 space-y-32">
+      {/* Content Sections - Enhanced Typography & Spacing */}
+      <div className="max-w-7xl mx-auto px-6 py-24 space-y-40">
         {/* Overview */}
         <motion.section 
-          className="space-y-8"
+          id="problem"
+          className="space-y-10"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div 
-            className="space-y-4"
+            className="space-y-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
-            <h2 className="text-3xl font-bold">The Problem</h2>
+            <h2 className="text-4xl font-bold tracking-tight">The Problem</h2>
           </motion.div>
           <motion.p 
-            className="text-lg text-muted-foreground leading-relaxed"
+            className="text-xl text-muted-foreground leading-relaxed max-w-4xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -216,23 +228,24 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
         {/* Research */}
         <motion.section 
-          className="space-y-8"
+          id="research"
+          className="space-y-10"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div 
-            className="space-y-4"
+            className="space-y-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
-            <h2 className="text-3xl font-bold">Research</h2>
+            <h2 className="text-4xl font-bold tracking-tight">Research</h2>
           </motion.div>
           <motion.p 
-            className="text-lg text-muted-foreground leading-relaxed"
+            className="text-xl text-muted-foreground leading-relaxed max-w-4xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -242,7 +255,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </motion.p>
           {project.research.artifacts.length > 0 && (
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8"
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -256,7 +269,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
                 >
-                  <Card className="overflow-hidden border-border/50">
+                  <Card className="overflow-hidden border-border/50 hover:border-border/80 transition-all duration-300 hover:bg-muted/20">
                     <CardContent className="p-0">
                       <ImageWithLightbox
                         src={artifact}
@@ -274,23 +287,24 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
         {/* Concept */}
         <motion.section 
-          className="space-y-8"
+          id="concept"
+          className="space-y-10"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div 
-            className="space-y-4"
+            className="space-y-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
-            <h2 className="text-3xl font-bold">Concept</h2>
+            <h2 className="text-4xl font-bold tracking-tight">Concept</h2>
           </motion.div>
           <motion.p 
-            className="text-lg text-muted-foreground leading-relaxed"
+            className="text-xl text-muted-foreground leading-relaxed max-w-4xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -300,7 +314,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </motion.p>
           {project.concept.artifacts.length > 0 && (
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8"
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -314,7 +328,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
                 >
-                  <Card className="overflow-hidden border-border/50">
+                  <Card className="overflow-hidden border-border/50 hover:border-border/80 transition-all duration-300 hover:bg-muted/20">
                     <CardContent className="p-0">
                       <ImageWithLightbox
                         src={artifact}
@@ -332,23 +346,24 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
         {/* Iteration */}
         <motion.section 
-          className="space-y-8"
+          id="iteration"
+          className="space-y-10"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div 
-            className="space-y-4"
+            className="space-y-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
-            <h2 className="text-3xl font-bold">Iteration</h2>
+            <h2 className="text-4xl font-bold tracking-tight">Iteration</h2>
           </motion.div>
           <motion.p 
-            className="text-lg text-muted-foreground leading-relaxed"
+            className="text-xl text-muted-foreground leading-relaxed max-w-4xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -358,7 +373,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </motion.p>
           {project.iteration.artifacts.length > 0 && (
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -372,7 +387,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
                 >
-                  <Card className="overflow-hidden border-border/50">
+                  <Card className="overflow-hidden border-border/50 hover:border-border/80 transition-all duration-300 hover:bg-muted/20">
                     <CardContent className="p-0">
                       <ImageWithLightbox
                         src={artifact}
@@ -390,23 +405,24 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
         {/* Final Product */}
         <motion.section 
-          className="space-y-8"
+          id="final-product"
+          className="space-y-10"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div 
-            className="space-y-4"
+            className="space-y-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
-            <h2 className="text-3xl font-bold">Final Product</h2>
+            <h2 className="text-4xl font-bold tracking-tight">Final Product</h2>
           </motion.div>
           <motion.p 
-            className="text-lg text-muted-foreground leading-relaxed"
+            className="text-xl text-muted-foreground leading-relaxed max-w-4xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -416,7 +432,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </motion.p>
           {project.finalProduct.artifacts.length > 0 && (
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -430,7 +446,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
                 >
-                  <Card className="overflow-hidden border-border/50">
+                  <Card className="overflow-hidden border-border/50 hover:border-border/80 transition-all duration-300 hover:bg-muted/20">
                     <CardContent className="p-0">
                       <ImageWithLightbox
                         src={artifact}
@@ -448,23 +464,24 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
         {/* Outcome & Impact */}
         <motion.section 
-          className="space-y-8"
+          id="outcome"
+          className="space-y-10"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div 
-            className="space-y-4"
+            className="space-y-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
-            <h2 className="text-3xl font-bold">Outcome & Impact</h2>
+            <h2 className="text-4xl font-bold tracking-tight">Outcome & Impact</h2>
           </motion.div>
           <motion.p 
-            className="text-lg text-muted-foreground leading-relaxed"
+            className="text-xl text-muted-foreground leading-relaxed max-w-4xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -475,14 +492,14 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           
           {project.outcome.metrics && project.outcome.metrics.length > 0 && (
             <motion.div 
-              className="pt-8"
+              className="pt-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             >
               <motion.h3 
-                className="text-xl font-semibold mb-6"
+                className="text-2xl font-semibold mb-8"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -491,7 +508,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 Key Metrics
               </motion.h3>
               <motion.div 
-                className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                className="grid grid-cols-1 md:grid-cols-3 gap-6"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -505,9 +522,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, delay: 1.2 + index * 0.1, ease: "easeOut" }}
                   >
-                    <Card className="border-border/50 bg-muted/20">
-                      <CardContent className="p-6 text-center">
-                        <p className="text-sm text-muted-foreground leading-relaxed">{metric}</p>
+                    <Card className="border-border/50 bg-muted/20 hover:bg-muted/30 transition-all duration-300 hover:border-border/80">
+                      <CardContent className="p-8 text-center">
+                        <p className="text-base text-muted-foreground leading-relaxed">{metric}</p>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -517,14 +534,14 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           )}
 
           <motion.div 
-            className="pt-8"
+            className="pt-12"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
           >
             <motion.h3 
-              className="text-xl font-semibold mb-6"
+              className="text-2xl font-semibold mb-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -533,7 +550,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               Key Learnings
             </motion.h3>
             <motion.ul 
-              className="space-y-4"
+              className="space-y-6"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -542,14 +559,14 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               {project.outcome.learnings.map((learning, index) => (
                 <motion.li 
                   key={index} 
-                  className="flex items-start gap-4 p-4 rounded-lg bg-muted/30 border border-border/50"
+                  className="flex items-start gap-6 p-6 rounded-lg bg-muted/30 border border-border/50 hover:bg-muted/40 hover:border-border/80 transition-all duration-300"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 1.2 + index * 0.1, ease: "easeOut" }}
                 >
-                  <div className="w-2 h-2 bg-primary rounded-full mt-3 flex-shrink-0" />
-                  <span className="text-muted-foreground leading-relaxed">{learning}</span>
+                  <div className="w-3 h-3 bg-primary rounded-full mt-3 flex-shrink-0" />
+                  <span className="text-base text-muted-foreground leading-relaxed">{learning}</span>
                 </motion.li>
               ))}
             </motion.ul>
@@ -558,41 +575,28 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
         {/* Navigation */}
         <motion.section 
-          className="pt-16 border-t border-border/50"
+          className="pt-20 border-t border-border/50"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div 
-            className="flex flex-col sm:flex-row justify-between items-center gap-6"
+            className="flex flex-col sm:flex-row justify-end items-center gap-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-            >
-              <Link href="/#projects" passHref>
-                <Button variant="outline" className="gap-2">
-                  <ArrowLeft className="h-4 w-4" />
-                  Back to All Projects
-                </Button>
-              </Link>
-            </motion.div>
             {project.externalLink && (
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
               >
                 <Link href={project.externalLink} target="_blank" passHref>
-                  <Button className="gap-2">
+                  <Button className="gap-3 px-6 py-3 hover:bg-primary/90 transition-all duration-200">
                     View Live Project
                     <ExternalLink className="h-4 w-4" />
                   </Button>

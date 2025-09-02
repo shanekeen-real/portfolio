@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import { usePathname } from "next/navigation";
 import styles from "@/styles/Container.module.css";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 type IconProps = {
   ["data-hide"]: boolean;
@@ -81,6 +83,9 @@ export default function AppContainer(props: ContainerProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const pathname = usePathname();
 
+  // Check if we're on a case study page
+  const isCaseStudyPage = pathname.startsWith('/projects/');
+
   // handle scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -104,7 +109,7 @@ export default function AppContainer(props: ContainerProps) {
       <nav
         className={cn(
           styles.nav,
-          isScrolled
+          isCaseStudyPage || isScrolled
             ? "bg-gradient-to-br from-background to-transparent border-b border-border backdrop-blur transition"
             : "bg-transparent",
         )}
@@ -124,9 +129,20 @@ export default function AppContainer(props: ContainerProps) {
             <CrossIcon data-hide={!isOpen} />
           </button>
         </div>
-        <Link href="/">
-          <span className="text-lg font-semibold">shane</span>
-        </Link>
+        
+        {/* Conditional logo/back button */}
+        {isCaseStudyPage ? (
+          <Link href="/#projects" passHref>
+            <Button variant="outline" className="gap-2 px-4 py-2 hover:bg-muted/50 transition-all duration-200">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Projects
+            </Button>
+          </Link>
+        ) : (
+          <Link href="/">
+            <span className="text-lg font-semibold">shane</span>
+          </Link>
+        )}
 
         {/* Desktop menu */}
         <ul className={styles["desktop-nav"]}>
