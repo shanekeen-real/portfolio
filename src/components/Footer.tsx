@@ -4,21 +4,32 @@ import { useState, useEffect } from "react";
 import { MailIcon } from "lucide-react";
 
 export default function Footer() {
-  // get the current time in GMT time zone
+  // get the current time in local timezone
   const [time, setTime] = useState<string>("");
+  const [timezone, setTimezone] = useState<string>("");
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const updateTime = () => {
       const date = new Date();
       setTime(
         date.toLocaleTimeString("en-US", {
           hour12: true,
           hour: "numeric",
           minute: "numeric",
-          timeZone: "GMT",
-        }),
+          second: "numeric",
+        })
       );
-    }, 1000);
+      
+      // Get the current timezone and extract just the city/region part
+      const timezoneAbbr = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      // Remove continent prefix (e.g., "Europe/London" -> "London")
+      const cityName = timezoneAbbr.split('/').pop() || timezoneAbbr;
+      setTimezone(cityName);
+    };
+
+    // Update immediately and then every second
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -27,20 +38,12 @@ export default function Footer() {
       <div className="container mx-auto flex flex-row items-center justify-between py-6">
         <span className="flex flex-row items-center space-x-4">
           <p className="text-xs text-muted-foreground">
-            Made with ❤️ by{" "}
-            <Link
-              href="https://github.com/shane"
-              target="_blank"
-              passHref
-              className="text-foreground transition hover:text-primary"
-            >
-              shane
-            </Link>
+            Made by shane
           </p>
           <hr className="hidden h-6 border-l border-muted md:flex" />
           <span className="flex hidden flex-row items-center space-x-2 md:flex">
             <p className="text-xs text-muted-foreground">Local time:</p>
-            <p className="text-sm font-semibold">{time} GMT</p>
+            <p className="text-sm font-semibold">{time} {timezone}</p>
           </span>
         </span>
         <Link
