@@ -161,13 +161,11 @@ export function EnhancedImageGallery({
             <motion.button
               key={index}
               onClick={() => goToImage(index)}
-              className={`relative flex-shrink-0 aspect-video w-20 overflow-hidden rounded-lg border-2 transition-all duration-300 ${
+              className={`relative flex-shrink-0 aspect-video w-20 overflow-hidden rounded-lg border-2 transition-all duration-200 ${
                 index === currentIndex
-                  ? "border-primary scale-105"
-                  : "border-border/50 hover:border-primary/40 hover:scale-105"
+                  ? "border-primary"
+                  : "border-border/50 hover:bg-accent hover:text-accent-foreground"
               }`}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.95 }}
             >
               <Image
                 src={image}

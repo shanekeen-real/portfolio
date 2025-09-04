@@ -676,12 +676,28 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div 
-            className="flex flex-col sm:flex-row justify-end items-center gap-8"
+            className="flex flex-col sm:flex-row justify-center items-center gap-4"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
+            {/* Back to Projects Button */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            >
+              <Link href="/#projects" passHref className="text-muted-foreground hover:text-foreground">
+                <Button variant="outline" className="gap-3 px-6 py-3 transition-all duration-200">
+                  <ArrowLeft className="h-4 w-4" />
+                  Back to Projects
+                </Button>
+              </Link>
+            </motion.div>
+
+            {/* View Live Project Button */}
             {project.externalLink && (
               <motion.div
                 initial={{ opacity: 0, x: 30 }}

@@ -135,8 +135,8 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
                 onClick={() => setCurrentIndex(index)}
                 className={`w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
                   index === currentIndex
-                    ? "border-primary scale-110"
-                    : "border-white/30 hover:border-white/60"
+                    ? "border-primary"
+                    : "border-white/30 hover:bg-accent hover:text-accent-foreground"
                 }`}
               >
                 <img

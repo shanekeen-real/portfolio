@@ -132,7 +132,7 @@ export default function AppContainer(props: ContainerProps) {
         
         {/* Conditional logo/back button */}
         {isCaseStudyPage ? (
-          <Link href="/#projects" passHref>
+          <Link href="/#projects" passHref className="text-muted-foreground hover:text-foreground">
             <Button variant="outline" className="gap-2 px-4 py-2 hover:bg-muted/50 transition-all duration-200">
               <ArrowLeft className="h-4 w-4" />
               Back to Projects
