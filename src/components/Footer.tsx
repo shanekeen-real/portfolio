@@ -2,8 +2,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { MailIcon } from "lucide-react";
+import Lottie from "lottie-react";
+import linkedinAnimation from "../../microanimations/linkedin.json";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Footer() {
+  const { resolvedTheme } = useTheme();
   // get the current time in local timezone
   const [time, setTime] = useState<string>("");
   const [timezone, setTimezone] = useState<string>("");
@@ -46,16 +50,50 @@ export default function Footer() {
             <p className="text-sm font-semibold">{time} {timezone}</p>
           </span>
         </span>
-        <Link
-          href="mailto:contact@shane.technology"
-          passHref
-          className="text-xs text-muted-foreground hover:text-foreground"
-        >
-          <Button variant={"outline"}>
-            <MailIcon className="h-4 w-4 md:mr-2" />
-            <span className="hidden md:flex">contact@shane.technology</span>
-          </Button>
-        </Link>
+        <div className="flex items-center space-x-3">
+          {/* LinkedIn Button */}
+          <Link
+            href="https://www.linkedin.com/in/shane-keen0000/"
+            target="_blank"
+            rel="noopener noreferrer"
+            passHref
+            className="text-xs text-muted-foreground hover:text-foreground"
+          >
+            <Button 
+              variant="outline" 
+              size="icon" 
+              className={`h-10 w-10 p-0 ${
+                resolvedTheme === 'dark' 
+                  ? 'text-muted-foreground hover:text-foreground' 
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <Lottie
+                animationData={linkedinAnimation}
+                loop={true}
+                autoplay={true}
+                className="h-6 w-6"
+                style={{
+                  filter: resolvedTheme === 'dark' 
+                    ? 'brightness(0) saturate(100%) invert(0.8)' 
+                    : 'brightness(0) saturate(100%) invert(0.3)'
+                }}
+              />
+            </Button>
+          </Link>
+          
+          {/* Email Button */}
+          <Link
+            href="mailto:contact@shane.technology"
+            passHref
+            className="text-xs text-muted-foreground hover:text-foreground"
+          >
+            <Button variant="outline">
+              <MailIcon className="h-4 w-4 md:mr-2" />
+              <span className="hidden md:flex">contact@shane.technology</span>
+            </Button>
+          </Link>
+        </div>
       </div>
       <div className="h-1 bg-[radial-gradient(closest-side,#8486ff,#42357d,#5d83ff,transparent)] opacity-50" />
     </footer>
