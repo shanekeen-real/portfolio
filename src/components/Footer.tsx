@@ -41,10 +41,23 @@ export default function Footer() {
     <footer className="w-full bg-gradient-to-t from-primary/[1%] to-transparent">
       <div className="container mx-auto flex flex-row items-center justify-between py-6">
         <span className="flex flex-row items-center space-x-4">
-          <p className="text-xs text-muted-foreground">
-            Made by shane
-          </p>
+          {/* Available for Work Button */}
+          <Link
+            href="mailto:contact@shane.technology"
+            passHref
+            className="text-xs text-muted-foreground hover:text-foreground"
+          >
+            <Button variant="outline" className="gap-2">
+              <div className="relative">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
+              </div>
+              <span>Available for work</span>
+            </Button>
+          </Link>
+          
           <hr className="hidden h-6 border-l border-muted md:flex" />
+          
           <span className="flex hidden flex-row items-center space-x-2 md:flex">
             <p className="text-xs text-muted-foreground">Local time:</p>
             <p className="text-sm font-semibold">{time} {timezone}</p>
@@ -95,7 +108,7 @@ export default function Footer() {
           </Link>
         </div>
       </div>
-      <div className="h-1 bg-[radial-gradient(closest-side,#8486ff,#42357d,#5d83ff,transparent)] opacity-50" />
+      <div className="h-1 bg-[radial-gradient(closest-side,#10b981,#059669,#34d399,transparent)] opacity-50 mb-4 md:mb-0" />
     </footer>
   );
 }
