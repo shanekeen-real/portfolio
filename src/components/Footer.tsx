@@ -108,7 +108,7 @@ export default function Footer() {
           </Link>
         </div>
       </div>
-      <div className="h-1 bg-[radial-gradient(closest-side,#10b981,#059669,#34d399,transparent)] opacity-50 mb-4 md:mb-0" />
+      <div className="h-1 bg-[radial-gradient(closest-side,#10b981,#059669,#34d399,transparent)] opacity-50" />
     </footer>
   );
 }

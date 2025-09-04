@@ -14,10 +14,14 @@ interface CounterProps {
 export function Counter({ end, duration = 2, className, suffix = "" }: CounterProps) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView) {
+      // Reset counter when out of view so it can animate again
+      setCount(0);
+      return;
+    }
 
     let startTime: number;
     let animationFrame: number;
