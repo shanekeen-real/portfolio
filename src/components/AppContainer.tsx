@@ -10,6 +10,7 @@ import styles from "@/styles/Container.module.css";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { SplashScreen } from "@/components/SplashScreen";
 
 type IconProps = {
   ["data-hide"]: boolean;
@@ -81,10 +82,13 @@ function NavItem(props: NavProps) {
 export default function AppContainer(props: ContainerProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isReturning, setIsReturning] = useState<boolean>(false);
   const pathname = usePathname();
 
   // Check if we're on a case study page
   const isCaseStudyPage = pathname.startsWith('/projects/');
+  const isHomePage = pathname === '/';
 
   // handle scroll
   useEffect(() => {
@@ -104,8 +108,32 @@ export default function AppContainer(props: ContainerProps) {
     setIsOpen(false);
   }, [pathname]);
 
+  // Show loading screen when navigating to homepage
+  useEffect(() => {
+    if (isHomePage) {
+      // Check if we're returning from a case study page
+      const wasOnCaseStudy = sessionStorage.getItem('wasOnCaseStudy') === 'true';
+      setIsReturning(wasOnCaseStudy);
+      setIsLoading(true);
+      
+      // Clear the flag
+      sessionStorage.removeItem('wasOnCaseStudy');
+    } else if (isCaseStudyPage) {
+      // Mark that we're on a case study page
+      sessionStorage.setItem('wasOnCaseStudy', 'true');
+    }
+  }, [isHomePage, isCaseStudyPage]);
+
+  // Handle splash screen completion
+  const handleSplashComplete = () => {
+    setIsLoading(false);
+  };
+
   return (
     <>
+      {/* Splash Screen */}
+      {isLoading && <SplashScreen onComplete={handleSplashComplete} isReturning={isReturning} />}
+
       <nav
         className={cn(
           styles.nav,
