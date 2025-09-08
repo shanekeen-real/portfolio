@@ -1,13 +1,13 @@
 {
-    "theme_color": "#7B82FE",
+    "theme_color": "#10b981",
     "background_color": "#0A0A13",
     "display": "standalone",
     "orientation": "portrait",
     "scope": "/",
     "start_url": "/",
-    "name": "WendoJ",
-    "short_name": "WendoJ",
-    "description": "Full-stack website developer and TypeScript enthusiast.",
+    "name": "Shane - UI/UX Designer & Developer",
+    "short_name": "Shane",
+    "description": "UI/UX designer and full-stack developer specializing in creating intuitive digital experiences.",
     "icons": [
         {
             "src": "/icon-192x192.png",

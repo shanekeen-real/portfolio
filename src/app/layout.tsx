@@ -6,6 +6,7 @@ import "@/styles/locomotive-scroll.css";
 import AppContainer from "@/components/AppContainer";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { PageTransition } from "@/components/PageTransition";
+import { DynamicFavicon } from "@/components/DynamicFavicon";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,8 +61,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="icon" href="/favicon logo_back.png" />
+        <link rel="apple-touch-icon" href="/favicon logo_back.png" />
+        <link rel="shortcut icon" href="/favicon logo_back.png" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider>
+          <DynamicFavicon />
           <AppContainer>
             <PageTransition>
               {children}
