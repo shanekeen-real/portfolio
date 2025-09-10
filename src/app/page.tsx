@@ -30,7 +30,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 
 import { motion } from "framer-motion";
-import { projects } from "@/lib/data";
+import { getFeaturedProjects } from "@/lib/data";
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ScrollProgress } from "@/components/ScrollProgress";
@@ -294,10 +294,26 @@ export default function Home() {
                      {/* Projects Grid */}
            <div className="mt-14">
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-               {projects.map((project, index) => (
+               {getFeaturedProjects().map((project, index) => (
                  <ProjectCard key={project.title} project={project} />
                ))}
              </div>
+             
+             {/* View All Case Studies Button */}
+             <motion.div 
+               className="mt-12 flex justify-center"
+               initial={{ opacity: 0, y: 20 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true, margin: "-100px" }}
+               transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+             >
+               <Link href="/projects" passHref>
+                 <Button className="gap-3 px-8 py-3">
+                   View All Case Studies
+                   <ChevronRight className="h-4 w-4" />
+                 </Button>
+               </Link>
+             </motion.div>
            </div>
         </div>
       </section>

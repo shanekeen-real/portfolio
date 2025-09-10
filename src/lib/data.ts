@@ -35,6 +35,7 @@ export interface Project {
     learnings: string[];
   };
   externalLink?: string;
+  featured?: boolean;
 }
 
 export const projects: Project[] = [
@@ -98,7 +99,8 @@ export const projects: Project[] = [
         "Real-time analysis is crucial for content optimization"
       ]
     },
-    externalLink: "https://yellowdollar.com"
+    externalLink: "https://yellowdollar.com",
+    featured: true
   },
   {
     id: "kickoff",
@@ -154,14 +156,15 @@ export const projects: Project[] = [
         "Social features enhance user engagement and retention",
         "3D design elements can significantly improve user experience in digital platforms"
       ]
-    }
+    },
+    featured: true
   },
   {
     id: "aurora-roofing",
     slug: "aurora-roofing",
     title: "Aurora Roofing",
     subtitle: "Responsive Web Design",
-    shortDescription: "A comprehensive responsive website redesign for a local roofing company, enhancing user experience and driving customer conversions through modern design principles.",
+    shortDescription: "A comprehensive responsive website design for a local roofing company, enhancing user experience and driving an up-tick in customer conversions.",
     fullDescription: "A functional and professional modern 5-page website for a roofing agency, increasing customer retention, conversion and brand awareness.",
     client: "Local Roofing Company",
     role: "UI/UX Designer",
@@ -215,7 +218,8 @@ export const projects: Project[] = [
         "Component systems ensure consistent visual execution across all pages",
         "SEO optimization should be integrated throughout the design process"
       ]
-    }
+    },
+    featured: true
   },
   {
     id: "gucci",
@@ -271,7 +275,65 @@ export const projects: Project[] = [
         "User feedback from testing sessions drives iterative improvement",
         "Physical retail experiences can be enhanced through digital innovation"
       ]
-    }
+    },
+    featured: true
+  },
+  {
+    id: "bookshelf",
+    slug: "bookshelf",
+    title: "Bookshelf",
+    subtitle: "App Design",
+    shortDescription: "A climate conscious app to promote upcycling, providing a platform for those who want to make or share their latest upcycled creations.",
+    fullDescription: "An app to promote social interaction focused on books and reading culture.",
+    client: "Personal Project",
+    role: "UI/UX Designer",
+    timeline: "8 weeks",
+    tools: ["Adobe XD", "Figma", "Photoshop", "Illustrator"],
+    coverImage: "/assets/bookshelf.png",
+    heroImage: "/assets/infinitevps-hero.svg",
+    scope: "UI/UX Design, Branding, Research, App Design, Wireframing & Prototyping",
+    problem: "After undertaking some initial research I decided to pose a solution to this growing problem of less and less people reading books in today's modern society.",
+    research: {
+      description: "Research included competitor research, branding analysis and target audience research. I found many new trends developing in the reading communities, such as a new one on TikTok - BookTok. Which helped provide good evidence that there is still a strong demand for this type of service.",
+      artifacts: [
+        "/assets/infinitevps-research-1.svg",
+        "/assets/infinitevps-research-2.svg",
+        "/assets/infinitevps-research-3.svg"
+      ]
+    },
+    concept: {
+      description: "This led to the idea of creating a standalone app where readers and book enthusiasts can come together and update their reading lists, provide ratings and converse with likeminded people.",
+      artifacts: [
+        "/assets/infinitevps-dashboard-wireframes.svg",
+        "/assets/infinitevps-monitoring-ui.svg",
+        "/assets/infinitevps-pain-points.svg"
+      ]
+    },
+    iteration: {
+      description: "I started the development process by creating a user journey, depicting the different sections of the app. After iterating and refining, this naturally progressed into sketching out some initial wireframes for how the platform could look. These are the initial wireframes I sketched out for the app concept. My aim was to create a clean and simple layout to allow the content to have the user's full attention. Initially I opted to have the book covers appear full size but after some user testing I came to the decision to alter the scale of the 'highlighted' title - enabling a greater user experience. Whilst user testing I continued to iterate and develop the different sections of the app, concluding the design by implementing the different design elements and content.",
+      artifacts: [
+        "/assets/infinitevps-user-journey.svg",
+        "/assets/infinitevps-final-dashboard.svg",
+        "/assets/infinitevps-monitoring-ui.svg"
+      ]
+    },
+    finalProduct: {
+      description: "8-Week Design Process / Solo Project / 2021.",
+      artifacts: [
+        "/assets/infinitevps-final-dashboard.svg",
+        "/assets/infinitevps-monitoring-ui.svg",
+        "/assets/infinitevps-dashboard-wireframes.svg"
+      ]
+    },
+    outcome: {
+      description: "The Bookshelf app design successfully addressed the declining reading culture by creating an engaging social platform for book enthusiasts.",
+      learnings: [
+        "User testing revealed the importance of proper content hierarchy and visual balance",
+        "Social features are crucial for building engaged communities around shared interests",
+        "Clean and simple layouts allow content to have the user's full attention"
+      ]
+    },
+    featured: false
   }
 ];
 
@@ -281,4 +343,8 @@ export function getProjectBySlug(slug: string): Project | undefined {
 
 export function getAllProjectSlugs(): string[] {
   return projects.map(project => project.slug);
+}
+
+export function getFeaturedProjects(): Project[] {
+  return projects.filter(project => project.featured !== false);
 }
