@@ -36,6 +36,7 @@ export interface Project {
   };
   externalLink?: string;
   featured?: boolean;
+  isNew?: boolean;
 }
 
 export const projects: Project[] = [
@@ -100,7 +101,8 @@ export const projects: Project[] = [
       ]
     },
     externalLink: "https://yellowdollar.com",
-    featured: true
+    featured: true,
+    isNew: true
   },
   {
     id: "kickoff",

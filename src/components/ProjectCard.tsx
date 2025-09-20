@@ -82,6 +82,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 />
               )}
               
+              {/* NEW Badge */}
+              {project.isNew && (
+                <div className="absolute top-3 right-3 z-10">
+                  <span className="transition border border-input bg-background flex items-center text-xs px-2.5 py-1.5 rounded-full hover:-translate-y-1 hover:bg-primary hover:text-primary-foreground duration-300">
+                    NEW
+                  </span>
+                </div>
+              )}
 
             </div>
           </Link>

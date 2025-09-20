@@ -185,7 +185,7 @@ export default function Home() {
             </Link>
             <Button
               variant="outline"
-              onClick={() => window.open('/CV 2025 Shane Keen v3.docx.pdf', '_blank')}
+              onClick={() => window.open('/NEW CV 2025 - Shane Keen.docx.pdf', '_blank')}
             >
               View Resumé
             </Button>
@@ -406,7 +406,7 @@ export default function Home() {
             </Link>
             <Button
               variant="outline"
-              onClick={() => window.open('/CV 2025 Shane Keen v3.docx.pdf', '_blank')}
+              onClick={() => window.open('/NEW CV 2025 - Shane Keen.docx.pdf', '_blank')}
             >
               View Resumé
             </Button>
