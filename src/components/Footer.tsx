@@ -66,7 +66,7 @@ export default function Footer() {
         <div className="flex items-center space-x-3">
           {/* LinkedIn Button */}
           <Link
-            href="https://www.linkedin.com/in/shane-keen0000/"
+            href="https://www.linkedin.com/in/shane-keen"
             target="_blank"
             rel="noopener noreferrer"
             passHref

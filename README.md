@@ -33,7 +33,7 @@ I'm a UI/UX designer and developer passionate about creating intuitive, user-cen
 
 - **Email**: contact@shane.technology
 - **Website**: [shane.technology](https://shane.technology)
-- **LinkedIn**: [shane-keen0000](https://www.linkedin.com/in/shane-keen0000/)
+- **LinkedIn**: [shane-keen](https://www.linkedin.com/in/shane-keen/)
 
 ---
 
