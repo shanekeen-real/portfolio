@@ -15,6 +15,7 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { EnhancedImageGallery } from "@/components/EnhancedImageGallery";
 import { ContentTabs } from "@/components/ContentTabs";
 import { LoadingPage } from "@/components/LoadingAnimation";
+import { BeforeAfterImageComparison } from "@/components/BeforeAfterImageComparison";
 
 interface ProjectPageProps {
   params: {
@@ -33,8 +34,12 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   const allImages = [
     project.heroImage,
     ...project.research.artifacts,
+    // Include concept artifacts and parts
     ...project.concept.artifacts,
+    ...(project.concept.parts?.flatMap(part => part.artifacts) || []),
+    // Include iteration artifacts and parts
     ...project.iteration.artifacts,
+    ...(project.iteration.parts?.flatMap(part => part.artifacts) || []),
     ...project.finalProduct.artifacts,
   ].filter(Boolean);
 
@@ -442,25 +447,81 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           >
             {project.concept.description}
           </motion.p>
-          {project.concept.artifacts.length > 0 && (
-            <motion.div 
-              className="pt-12"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            >
-              <EnhancedImageGallery
-                images={project.concept.artifacts}
-                alt="Concept artifacts"
-                onImageClick={(index) => {
-                  openLightbox(index, project.concept.artifacts);
-                }}
-                showThumbnails={true}
-                autoPlay={false}
-                sectionId="concept"
-              />
-            </motion.div>
+          
+          {/* Render concept parts if they exist, otherwise render the regular artifacts */}
+          {project.concept.parts ? (
+            <div className="space-y-20 pt-12">
+              {project.concept.parts.map((part, partIndex) => (
+                <motion.div 
+                  key={partIndex}
+                  className="space-y-10"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8, delay: 0.6 + (partIndex * 0.2), ease: "easeOut" }}
+                >
+                  <motion.div 
+                    className="space-y-6"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: 0.8 + (partIndex * 0.2), ease: "easeOut" }}
+                  >
+                    <h3 className="text-2xl font-semibold tracking-tight">{part.title}</h3>
+                  </motion.div>
+                  <motion.p 
+                    className="text-lg text-muted-foreground leading-relaxed max-w-4xl"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: 1.0 + (partIndex * 0.2), ease: "easeOut" }}
+                  >
+                    {part.description}
+                  </motion.p>
+                  {part.artifacts.length > 0 && (
+                    <motion.div 
+                      className="pt-8"
+                      initial={{ opacity: 0, y: 50 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ duration: 0.8, delay: 1.2 + (partIndex * 0.2), ease: "easeOut" }}
+                    >
+                      <EnhancedImageGallery
+                        images={part.artifacts}
+                        alt={`${part.title} artifacts`}
+                        onImageClick={(index) => {
+                          openLightbox(index, part.artifacts);
+                        }}
+                        showThumbnails={true}
+                        autoPlay={false}
+                        sectionId={`concept-part-${partIndex}`}
+                      />
+                    </motion.div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            project.concept.artifacts.length > 0 && (
+              <motion.div 
+                className="pt-12"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+              >
+                <EnhancedImageGallery
+                  images={project.concept.artifacts}
+                  alt="Concept artifacts"
+                  onImageClick={(index) => {
+                    openLightbox(index, project.concept.artifacts);
+                  }}
+                  showThumbnails={true}
+                  autoPlay={false}
+                  sectionId="concept"
+                />
+              </motion.div>
+            )
           )}
         </motion.section>
 
@@ -491,25 +552,101 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           >
             {project.iteration.description}
           </motion.p>
-          {project.iteration.artifacts.length > 0 && (
-            <motion.div 
-              className="pt-12"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            >
-              <EnhancedImageGallery
-                images={project.iteration.artifacts}
-                alt="Iteration artifacts"
-                onImageClick={(index) => {
-                  openLightbox(index, project.iteration.artifacts);
-                }}
-                showThumbnails={true}
-                autoPlay={false}
-                sectionId="iteration"
-              />
-            </motion.div>
+          
+          {/* Render iteration parts if they exist, otherwise render the regular artifacts */}
+          {project.iteration.parts ? (
+            <div className="space-y-20 pt-12">
+              {project.iteration.parts.map((part, partIndex) => (
+                <motion.div 
+                  key={partIndex}
+                  className="space-y-10"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8, delay: 0.6 + (partIndex * 0.2), ease: "easeOut" }}
+                >
+                  <motion.div 
+                    className="space-y-6"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: 0.8 + (partIndex * 0.2), ease: "easeOut" }}
+                  >
+                    <h3 className="text-2xl font-semibold tracking-tight">{part.title}</h3>
+                  </motion.div>
+                  <motion.p 
+                    className="text-lg text-muted-foreground leading-relaxed max-w-4xl"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: 1.0 + (partIndex * 0.2), ease: "easeOut" }}
+                  >
+                    {part.description}
+                  </motion.p>
+                  
+                  {/* Render comparison component if it exists */}
+                  {part.comparison && (
+                    <motion.div 
+                      className="pt-8"
+                      initial={{ opacity: 0, y: 50 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ duration: 0.8, delay: 1.2 + (partIndex * 0.2), ease: "easeOut" }}
+                    >
+                      <BeforeAfterImageComparison
+                        beforeImage={part.comparison.beforeImage}
+                        afterImage={part.comparison.afterImage}
+                        beforeAlt={part.comparison.beforeAlt}
+                        afterAlt={part.comparison.afterAlt}
+                      />
+                    </motion.div>
+                  )}
+                  
+                  {/* Render regular image gallery if artifacts exist */}
+                  {part.artifacts.length > 0 && (
+                    <motion.div 
+                      className="pt-8"
+                      initial={{ opacity: 0, y: 50 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ duration: 0.8, delay: 1.2 + (partIndex * 0.2), ease: "easeOut" }}
+                    >
+                      <EnhancedImageGallery
+                        images={part.artifacts}
+                        alt={`${part.title} artifacts`}
+                        onImageClick={(index) => {
+                          openLightbox(index, part.artifacts);
+                        }}
+                        showThumbnails={true}
+                        autoPlay={false}
+                        sectionId={`iteration-part-${partIndex}`}
+                      />
+                    </motion.div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            project.iteration.artifacts.length > 0 && (
+              <motion.div 
+                className="pt-12"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+              >
+                <EnhancedImageGallery
+                  images={project.iteration.artifacts}
+                  alt="Iteration artifacts"
+                  onImageClick={(index) => {
+                    openLightbox(index, project.iteration.artifacts);
+                  }}
+                  showThumbnails={true}
+                  autoPlay={false}
+                  sectionId="iteration"
+                />
+              </motion.div>
+            )
           )}
         </motion.section>
 

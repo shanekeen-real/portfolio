@@ -20,10 +20,26 @@ export interface Project {
   concept: {
     description: string;
     artifacts: string[];
+    parts?: {
+      title: string;
+      description: string;
+      artifacts: string[];
+    }[];
   };
   iteration: {
     description: string;
     artifacts: string[];
+    parts?: {
+      title: string;
+      description: string;
+      artifacts: string[];
+      comparison?: {
+        beforeImage: string;
+        afterImage: string;
+        beforeAlt: string;
+        afterAlt: string;
+      };
+    }[];
   };
   finalProduct: {
     description: string;
@@ -116,39 +132,130 @@ export const projects: Project[] = [
     timeline: "12 weeks",
     tools: ["Framer", "Cinema 4D", "Figma", "Blender"],
     coverImage: "/assets/Kickoff.png",
-    heroImage: "/assets/translatebot-hero.svg",
+    heroImage: "/assets/casestudies_photos/kickoff/heroimg.PNG",
     scope: "UI/UX Design, Branding, 3D Design, Wireframing, Research & Prototyping",
     problem: "As an avid football fan, I have become all too familiar with the growing piracy crisis the broadcast companies are facing when it comes to online streaming. So I wanted to try and find a solution which would appeal to both the companies and the fans.",
     research: {
       description: "After undertaking many research studies, I came to the conclusion that fans would in fact be happier paying for a stable all in-one product. As shown in other case studies such as Limewire/Spotify, evidence shows devoted users will actually rather pay if the product is more convenient and stable in comparison to the illegal alternatives.",
       artifacts: [
-        "/assets/translatebot-research-1.svg",
-        "/assets/translatebot-research-2.svg",
-        "/assets/translatebot-research-3.svg"
+        "/assets/casestudies_photos/kickoff/researchfindings.png"
       ]
     },
     concept: {
       description: "I wanted to create a platform where fans could not only watch their team every week, but could also interact and network with other fans. So, I created a blueprint which outlines the different functions and features of the service.",
       artifacts: [
-        "/assets/translatebot-command-flow.svg",
-        "/assets/translatebot-command-analysis.svg",
-        "/assets/translatebot-user-research.svg"
+        "/assets/casestudies_photos/kickoff/userflowfunctionmap.png",
+        "/assets/casestudies_photos/kickoff/branddguidelines.png"
+      ],
+      parts: [
+        {
+          title: "User Flow & Function Mapping",
+          description: "Creating a comprehensive user flow and function map was essential to understand how fans would navigate through the platform. This blueprint helped define the core user journeys and identify key interaction points between users watching matches and engaging with the community.",
+          artifacts: [
+            "/assets/casestudies_photos/kickoff/userflowfunctionmap.png"
+          ]
+        },
+        {
+          title: "Brand Guidelines & Design System",
+          description: "Establishing brand guidelines early in the design process was crucial for maintaining visual consistency throughout the platform. By defining typography, color palettes, spacing, and component styles upfront, I was able to accelerate the development process and ensure a cohesive user experience. This systematic approach eliminated design inconsistencies and provided a clear foundation for all future design decisions.",
+          artifacts: [
+            "/assets/casestudies_photos/kickoff/branddguidelines.png"
+          ]
+        }
       ]
     },
     iteration: {
-      description: "Starting with wireframes allowed me to quickly sketch out ideas and then throughout the development of this project, frequent user testing sessions were conducted with the target market to ensure both the features and design was aligned with their expectations. Before working on the branding for this project, I decided to spend longer on refining the layout for each of the screens, this proved beneficial later on throughout the development. Once I was satisfied with the layout and user flow, I started developing the designs by adding content and experimenting with the execution of the different branding elements. I used a small amount of 3D design to implement within the final concept, to do this I used Blender and Cinema 4D to create, light and render an environment which replicated how the environment could look if further developed.",
+      description: "The iteration process was divided into three key phases, each building upon the previous to create a refined and polished user experience.",
       artifacts: [
-        "/assets/translatebot-dashboard-wireframes.svg",
-        "/assets/translatebot-final-ui.svg",
-        "/assets/translatebot-command-flow.svg"
+        "/assets/casestudies_photos/kickoff/wireframes/landing1.png",
+        "/assets/casestudies_photos/kickoff/wireframes/dashboard1.png",
+        "/assets/casestudies_photos/kickoff/wireframes/avatar1.png",
+        "/assets/casestudies_photos/kickoff/wireframes/signin1.png",
+        "/assets/casestudies_photos/kickoff/wireframes/leaderboard1.png",
+        "/assets/casestudies_photos/kickoff/wireframes/livematch1.png",
+        "/assets/casestudies_photos/kickoff/wireframes/map1.png",
+        "/assets/casestudies_photos/kickoff/wireframes/plan1.png",
+        "/assets/casestudies_photos/kickoff/development/3dev.png",
+        "/assets/casestudies_photos/kickoff/development/3devcharacters.png",
+        "/assets/casestudies_photos/kickoff/development/v1/landing2.png",
+        "/assets/casestudies_photos/kickoff/development/v1/dashboard2.png",
+        "/assets/casestudies_photos/kickoff/development/v1/avatar2.png",
+        "/assets/casestudies_photos/kickoff/development/v1/signin2.png",
+        "/assets/casestudies_photos/kickoff/development/v1/leaderboard2.png",
+        "/assets/casestudies_photos/kickoff/development/v1/livematch2.png",
+        "/assets/casestudies_photos/kickoff/development/v1/map2.png",
+        "/assets/casestudies_photos/kickoff/development/v1/plan2.png",
+        "/assets/casestudies_photos/kickoff/development/v2/landing3.png",
+        "/assets/casestudies_photos/kickoff/development/v2/dashboard3.png",
+        "/assets/casestudies_photos/kickoff/development/v2/avatar3.png",
+        "/assets/casestudies_photos/kickoff/development/v2/signin3.png",
+        "/assets/casestudies_photos/kickoff/development/v2/leaderboard3.png",
+        "/assets/casestudies_photos/kickoff/development/v2/livematch3.png",
+        "/assets/casestudies_photos/kickoff/development/v2/map3.png",
+        "/assets/casestudies_photos/kickoff/development/v2/plan3.png"
+      ],
+      parts: [
+        {
+          title: "Initial Wireframes",
+          description: "Starting with wireframes allowed me to quickly sketch out ideas and test initial concepts with users. This foundational step helped establish the core user flows and basic layout structure for the platform.",
+          artifacts: [
+            "/assets/casestudies_photos/kickoff/wireframes/landing1.png",
+            "/assets/casestudies_photos/kickoff/wireframes/dashboard1.png",
+            "/assets/casestudies_photos/kickoff/wireframes/avatar1.png",
+            "/assets/casestudies_photos/kickoff/wireframes/signin1.png",
+            "/assets/casestudies_photos/kickoff/wireframes/leaderboard1.png",
+            "/assets/casestudies_photos/kickoff/wireframes/livematch1.png",
+            "/assets/casestudies_photos/kickoff/wireframes/map1.png",
+            "/assets/casestudies_photos/kickoff/wireframes/plan1.png"
+          ]
+        },
+        {
+          title: "Wireframe → Higher Fidelity",
+          description: "This comparison shows the evolution from initial wireframes to the first iteration of higher fidelity designs. Drag the slider to see how the basic layouts were enhanced with visual elements, typography, and improved user interface components.",
+          artifacts: [],
+          comparison: {
+            beforeImage: "/assets/casestudies_photos/kickoff/wireframes/dashboard1.png",
+            afterImage: "/assets/casestudies_photos/kickoff/development/v1/dashboard2.png",
+            beforeAlt: "Dashboard wireframe",
+            afterAlt: "Dashboard higher fidelity design"
+          }
+        },
+        {
+          title: "Development & Testing",
+          description: "Frequent user testing sessions were conducted with the target market to ensure both the features and design were aligned with their expectations. This phase focused on refining layouts and validating user flows before moving to higher fidelity designs.",
+          artifacts: [
+            "/assets/casestudies_photos/kickoff/development/v1/landing2.png",
+            "/assets/casestudies_photos/kickoff/development/v1/dashboard2.png",
+            "/assets/casestudies_photos/kickoff/development/v1/avatar2.png",
+            "/assets/casestudies_photos/kickoff/development/v1/signin2.png",
+            "/assets/casestudies_photos/kickoff/development/v1/leaderboard2.png",
+            "/assets/casestudies_photos/kickoff/development/v1/livematch2.png",
+            "/assets/casestudies_photos/kickoff/development/v1/map2.png",
+            "/assets/casestudies_photos/kickoff/development/v1/plan2.png"
+          ]
+        },
+        {
+          title: "Final Iteration & 3D Integration",
+          description: "Once satisfied with the layout and user flow, I developed the final designs by adding content and experimenting with branding elements. I integrated 3D design using Blender and Cinema 4D to create an environment that replicated how the platform could look if further developed.",
+          artifacts: [
+            "/assets/casestudies_photos/kickoff/development/v2/landing3.png",
+            "/assets/casestudies_photos/kickoff/development/v2/dashboard3.png",
+            "/assets/casestudies_photos/kickoff/development/v2/avatar3.png",
+            "/assets/casestudies_photos/kickoff/development/v2/signin3.png",
+            "/assets/casestudies_photos/kickoff/development/v2/leaderboard3.png",
+            "/assets/casestudies_photos/kickoff/development/v2/livematch3.png",
+            "/assets/casestudies_photos/kickoff/development/v2/map3.png",
+            "/assets/casestudies_photos/kickoff/development/v2/plan3.png",
+            "/assets/casestudies_photos/kickoff/development/3dev.png",
+            "/assets/casestudies_photos/kickoff/development/3devcharacters.png"
+          ]
+        }
       ]
     },
     finalProduct: {
       description: "12 Week Design Process / Solo Project / 2023.",
       artifacts: [
-        "/assets/translatebot-final-ui.svg",
-        "/assets/translatebot-dashboard-wireframes.svg",
-        "/assets/translatebot-command-flow.svg"
+        "/assets/casestudies_photos/kickoff/finalproduct.jpg"
       ]
     },
     outcome: {

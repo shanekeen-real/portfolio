@@ -4,7 +4,7 @@ A modern, responsive portfolio website showcasing my UI/UX design projects and c
 
 ## About Me
 
-I'm a UI/UX designer and developer passionate about creating intuitive, user-centered designs that solve real problems. With over 7 years of experience, I specialize in product design, frontend development, and design systems.
+I'm a UI/UX designer and developer passionate about creating intuitive, user-centered designs that solve real problems. With over 7 years of experience, I specialize in product design, UI/UX, and design systems.
 
 ## Portfolio Features
 
@@ -38,3 +38,4 @@ I'm a UI/UX designer and developer passionate about creating intuitive, user-cen
 ---
 
 Built with ❤️ using Next.js, TypeScript, and Tailwind CSS
+By Shane
