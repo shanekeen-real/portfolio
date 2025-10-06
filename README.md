@@ -37,5 +37,5 @@ I'm a UI/UX designer and developer passionate about creating intuitive, user-cen
 
 ---
 
-Built with ❤️ using Next.js, TypeScript, and Tailwind CSS
+Built using Next.js, TypeScript, and Tailwind CSS
 By Shane
