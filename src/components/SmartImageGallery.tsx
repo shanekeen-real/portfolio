@@ -123,7 +123,7 @@ export function SmartImageGallery({
           className={getContainerClass()}
         >
           <Image
-            src={images[currentIndex]}
+            src={images[currentIndex] || ''}
             alt={`${alt} ${currentIndex + 1}`}
             fill
             className={getImageClass()}
