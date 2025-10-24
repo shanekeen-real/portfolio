@@ -650,8 +650,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                       viewport={{ once: true, margin: "-100px" }}
                       transition={{ duration: 0.4, delay: 0.6 + (partIndex * 0.1), ease: "easeOut" }}
                     >
-                      {/* Use EnhancedImageGallery for Initial Wireframes, SmartImageGallery for others */}
-                      {part.title === "Initial Wireframes" ? (
+                      {/* Use EnhancedImageGallery for Initial Wireframes and Development & Testing, SmartImageGallery for others */}
+                      {(part.title === "Initial Wireframes" || part.title === "Development & Testing") ? (
                         <EnhancedImageGallery
                           images={part.artifacts}
                           alt={`${part.title} artifacts`}
