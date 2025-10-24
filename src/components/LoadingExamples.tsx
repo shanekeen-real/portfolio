@@ -55,10 +55,10 @@ export function LoadingExamples() {
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">Different Colors</h3>
         <div className="flex gap-4">
-          <LoadingSpinner size="md" color="primary" />
-          <LoadingSpinner size="md" color="secondary" />
-          <LoadingSpinner size="md" color="white" />
-          <LoadingSpinner size="md" color="black" />
+          <LoadingSpinner size="md" />
+          <LoadingSpinner size="md" />
+          <LoadingSpinner size="md" />
+          <LoadingSpinner size="md" />
         </div>
       </div>
 
@@ -102,7 +102,7 @@ export function LoadingExamples() {
 export function ProjectCardLoading() {
   return (
     <div className="aspect-video w-full flex items-center justify-center">
-      <LoadingSpinner size="lg" color="primary" />
+      <LoadingSpinner size="lg" />
     </div>
   );
 }
@@ -114,7 +114,7 @@ export function SubmitButton({ isLoading, children }: { isLoading: boolean, chil
       className="px-4 py-2 bg-primary text-primary-foreground rounded-md disabled:opacity-50"
       disabled={isLoading}
     >
-      {isLoading ? <LoadingInline size="sm" color="white" /> : children}
+      {isLoading ? <LoadingInline size="sm" /> : children}
     </button>
   );
 }
@@ -123,7 +123,7 @@ export function SubmitButton({ isLoading, children }: { isLoading: boolean, chil
 export function ImageGalleryLoading() {
   return (
     <div className="aspect-video w-full flex items-center justify-center">
-      <LoadingSpinner size="md" color="primary" />
+      <LoadingSpinner size="md" />
     </div>
   );
 }
