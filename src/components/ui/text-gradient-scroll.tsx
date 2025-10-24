@@ -97,7 +97,7 @@ const Word = ({ children, progress, range }: WordType) => {
 };
 
 const Letter = ({ children, progress, range }: LetterType) => {
-  if (typeof children === "string") {
+  if (typeof children === "string" && range && range.length >= 2) {
     const amount = range[1] - range[0];
     const step = amount / children.length;
 
