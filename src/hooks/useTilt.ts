@@ -13,7 +13,7 @@ interface TiltOptions {
   glare?: boolean;
   'max-glare'?: number;
   'glare-prerender'?: boolean;
-  'mouse-event-element'?: string | null;
+  'mouse-event-element'?: string | undefined;
   gyroscope?: boolean;
   gyroscopeMinAngleX?: number;
   gyroscopeMaxAngleX?: number;
