@@ -71,7 +71,7 @@ export function EnhancedImageGallery({
           className="relative aspect-video overflow-hidden rounded-xl border border-border/50"
         >
           <Image
-            src={images[currentIndex]}
+            src={images[currentIndex] || ''}
             alt={`${alt} ${currentIndex + 1}`}
             fill
             className="object-cover transition-transform duration-500"
