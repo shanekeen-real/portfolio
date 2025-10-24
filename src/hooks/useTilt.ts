@@ -39,7 +39,6 @@ export const useTilt = (options: TiltOptions = {}) => {
       glare: false,
       'max-glare': 0.5,
       'glare-prerender': false,
-      'mouse-event-element': undefined,
       gyroscope: true,
       gyroscopeMinAngleX: -45,
       gyroscopeMaxAngleX: 45,
