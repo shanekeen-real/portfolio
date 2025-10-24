@@ -134,19 +134,25 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
   // Handle touch events for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
     if (zoom > 1 && e.touches.length === 1) {
+      const touch = e.touches[0];
+      if (!touch) return;
+      
       setIsDragging(true);
       setDragStart({ 
-        x: e.touches[0].clientX - position.x, 
-        y: e.touches[0].clientY - position.y 
+        x: touch.clientX - position.x, 
+        y: touch.clientY - position.y 
       });
     }
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (isDragging && zoom > 1 && e.touches.length === 1) {
+      const touch = e.touches[0];
+      if (!touch) return;
+      
       setPosition({
-        x: e.touches[0].clientX - dragStart.x,
-        y: e.touches[0].clientY - dragStart.y
+        x: touch.clientX - dragStart.x,
+        y: touch.clientY - dragStart.y
       });
     }
   };
