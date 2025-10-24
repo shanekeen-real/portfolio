@@ -49,9 +49,12 @@ export const useTilt = (options: TiltOptions = {}) => {
 
     return () => {
       // VanillaTilt automatically cleans up when the element is removed
-      // or we can manually destroy by calling VanillaTilt.destroyAll()
-      if (element && element.vanillaTilt) {
-        element.vanillaTilt.destroy();
+      // We can also use VanillaTilt.destroyAll() to clean up all instances
+      if (element) {
+        // VanillaTilt adds a destroy method to the element
+        if ('destroy' in element && typeof (element as any).destroy === 'function') {
+          (element as any).destroy();
+        }
       }
     };
   }, [options]);
