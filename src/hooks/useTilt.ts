@@ -45,7 +45,7 @@ export const useTilt = (options: TiltOptions = {}) => {
       gyroscopeMinAngleY: -45,
       gyroscopeMaxAngleY: 45,
       ...options,
-    }) as any;
+    });
 
     return () => {
       if (tiltInstance && typeof tiltInstance.destroy === 'function') {

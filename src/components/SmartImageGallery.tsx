@@ -76,7 +76,7 @@ export function SmartImageGallery({
     }, interval);
 
     return () => clearInterval(timer);
-  }, [autoPlay, isPlaying, interval, images.length]);
+  }, [autoPlay, isPlaying, interval, images.length, nextImage]);
 
   const toggleAutoPlay = () => {
     setIsPlaying(!isPlaying);
@@ -123,7 +123,7 @@ export function SmartImageGallery({
           className={getContainerClass()}
         >
           <Image
-            src={images[currentIndex] || ''}
+            src={images[currentIndex] ?? ''}
             alt={`${alt} ${currentIndex + 1}`}
             fill
             className={getImageClass()}

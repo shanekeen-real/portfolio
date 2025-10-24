@@ -57,7 +57,7 @@ export function SplashScreen({ onComplete, isReturning = false }: SplashScreenPr
       };
 
       // Start preloading
-      preloadImages();
+      void preloadImages();
 
       for (const step of steps) {
         setLoadingProgress(step.progress);
@@ -72,8 +72,8 @@ export function SplashScreen({ onComplete, isReturning = false }: SplashScreenPr
       onComplete();
     };
 
-    loadAssets();
-  }, [onComplete]);
+    void loadAssets();
+  }, [onComplete, isReturning]);
 
   return (
     <AnimatePresence>

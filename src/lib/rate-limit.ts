@@ -1,9 +1,9 @@
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 // Simple in-memory rate limiting (use Redis in production)
 const attempts = new Map<string, { count: number; lastAttempt: number }>();
 
-export function rateLimit(ip: string, maxAttempts: number = 5, windowMs: number = 15 * 60 * 1000) {
+export function rateLimit(ip: string, maxAttempts = 5, windowMs = 15 * 60 * 1000) {
   const now = Date.now();
   const key = ip;
   
