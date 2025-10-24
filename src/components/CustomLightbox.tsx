@@ -132,6 +132,11 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
     setIsDragging(false);
   };
 
+  // Handle double click to reset zoom and position
+  const handleDoubleClick = () => {
+    resetZoom();
+  };
+
   // Handle touch events for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
     if (zoom > 1 && e.touches.length === 1) {
@@ -225,7 +230,7 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
 
         {/* Main Image */}
         <div 
-          className="flex items-center justify-center h-full p-8 overflow-hidden"
+          className="flex items-center justify-center h-full w-full overflow-hidden"
           onWheel={handleWheel}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -233,29 +238,33 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
         >
           <div
             key={currentIndex}
-            className="relative max-w-full max-h-full cursor-grab active:cursor-grabbing"
+            className="relative flex items-center justify-center cursor-grab active:cursor-grabbing"
             onMouseDown={handleMouseDown}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+            onDoubleClick={handleDoubleClick}
             style={{
               transform: `scale(${zoom}) translate(${position.x}px, ${position.y}px)`,
               transformOrigin: 'center center',
               transition: isDragging ? 'none' : 'transform 0.2s ease-out',
-              opacity: 1
+              opacity: 1,
+              maxWidth: "90vw",
+              maxHeight: "90vh"
             }}
           >
             <Image
               ref={imageRef}
               src={images[currentIndex] ?? ''}
               alt={`Image ${currentIndex + 1}`}
-              className="max-w-full max-h-full object-contain select-none"
-              fill
+              className="object-contain select-none"
+              width={1200}
+              height={800}
               style={{
+                maxWidth: "90vw",
+                maxHeight: "90vh",
                 width: "auto",
                 height: "auto",
-                maxWidth: "100vw",
-                maxHeight: "100vh",
               }}
               draggable={false}
             />
