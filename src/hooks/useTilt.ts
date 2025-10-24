@@ -52,8 +52,8 @@ export const useTilt = (options: TiltOptions = {}) => {
       // We can also use VanillaTilt.destroyAll() to clean up all instances
       if (element) {
         // VanillaTilt adds a destroy method to the element
-        if ('destroy' in element && typeof (element as any).destroy === 'function') {
-          (element as any).destroy();
+        if ('destroy' in element && typeof (element as unknown as { destroy: () => void }).destroy === 'function') {
+          (element as unknown as { destroy: () => void }).destroy();
         }
       }
     };

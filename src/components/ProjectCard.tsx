@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/LoadingAnimation";
 import { ExternalLink } from "lucide-react";
 import { useTilt } from "@/hooks/useTilt";
-import { Project } from "@/lib/data";
+import type { Project } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Maximize2, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React from "react";
@@ -52,12 +52,12 @@ export function SmartImageGallery({
       setImageDimensions(dimensions);
     };
 
-    loadImageDimensions();
+    void loadImageDimensions();
   }, [images]);
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
+  }, [images.length]);
 
   const prevImage = () => {
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);

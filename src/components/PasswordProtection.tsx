@@ -34,7 +34,7 @@ export function PasswordProtection({ onUnlock, externalLink, project }: Password
         }),
       });
       
-      const data = await response.json();
+      const data = await response.json() as { success: boolean };
       
       if (data.success) {
         onUnlock();
