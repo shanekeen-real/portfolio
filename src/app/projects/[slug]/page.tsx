@@ -650,8 +650,19 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                       viewport={{ once: true, margin: "-100px" }}
                       transition={{ duration: 0.4, delay: 0.6 + (partIndex * 0.1), ease: "easeOut" }}
                     >
-                      {/* Use SmartImageGallery for app-related sections and website sections */}
-                      {(part.title.toLowerCase().includes('app') || part.title.toLowerCase().includes('mobile')) ? (
+                      {/* Use EnhancedImageGallery for Initial Wireframes, SmartImageGallery for others */}
+                      {part.title === "Initial Wireframes" ? (
+                        <EnhancedImageGallery
+                          images={part.artifacts}
+                          alt={`${part.title} artifacts`}
+                          onImageClick={(index) => {
+                            openLightbox(index, part.artifacts);
+                          }}
+                          showThumbnails={true}
+                          autoPlay={false}
+                          sectionId={`iteration-part-${partIndex}`}
+                        />
+                      ) : (part.title.toLowerCase().includes('app') || part.title.toLowerCase().includes('mobile')) ? (
                         <SmartImageGallery
                           images={part.artifacts}
                           alt={`${part.title} artifacts`}
