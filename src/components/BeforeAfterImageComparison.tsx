@@ -44,7 +44,10 @@ export function BeforeAfterImageComparison({
     if (!containerRef.current || !e.touches || e.touches.length === 0) return;
     
     const rect = containerRef.current.getBoundingClientRect();
-    const x = e.touches[0].clientX - rect.left;
+    const touch = e.touches[0];
+    if (!touch) return;
+    
+    const x = touch.clientX - rect.left;
     const percentage = (x / rect.width) * 100;
     setSliderPosition(Math.max(0, Math.min(100, percentage)));
   };
