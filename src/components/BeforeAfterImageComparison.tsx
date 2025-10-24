@@ -41,7 +41,7 @@ export function BeforeAfterImageComparison({
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !e.touches || e.touches.length === 0) return;
     
     const rect = containerRef.current.getBoundingClientRect();
     const x = e.touches[0].clientX - rect.left;
