@@ -98,14 +98,18 @@ const Word = ({ children, progress, range }: WordType) => {
 
 const Letter = ({ children, progress, range }: LetterType) => {
   if (typeof children === "string" && range && range.length >= 2) {
-    const amount = range[1] - range[0];
+    const rangeStart = range[0];
+    const rangeEnd = range[1];
+    if (rangeStart === undefined || rangeEnd === undefined) return null;
+    
+    const amount = rangeEnd - rangeStart;
     const step = amount / children.length;
 
     return (
       <span className="relative me-2 mt-2">
         {children.split("").map((char: string, i: number) => {
-          const start = range[0] + i * step;
-          const end = range[0] + (i + 1) * step;
+          const start = rangeStart + i * step;
+          const end = rangeStart + (i + 1) * step;
           return (
             <Char key={`c_${i}`} progress={progress} range={[start, end]}>
               {char}
