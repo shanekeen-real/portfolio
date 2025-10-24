@@ -28,7 +28,7 @@ export const useTilt = (options: TiltOptions = {}) => {
     const element = elementRef.current;
     if (!element) return;
 
-    const tiltInstance = VanillaTilt.init(element, {
+    VanillaTilt.init(element, {
       max: 15,
       perspective: 1000,
       scale: 1.05,
@@ -48,8 +48,10 @@ export const useTilt = (options: TiltOptions = {}) => {
     });
 
     return () => {
-      if (tiltInstance && typeof tiltInstance.destroy === 'function') {
-        tiltInstance.destroy();
+      // VanillaTilt automatically cleans up when the element is removed
+      // or we can manually destroy by calling VanillaTilt.destroyAll()
+      if (element && element.vanillaTilt) {
+        element.vanillaTilt.destroy();
       }
     };
   }, [options]);
