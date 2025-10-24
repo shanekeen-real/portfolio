@@ -11,7 +11,7 @@ export default function NotFound() {
           Page Not Found
         </h2>
         <p className="text-muted-foreground max-w-md">
-          Sorry, the page you're looking for doesn't exist. It might have been moved or deleted.
+          Sorry, the page you&apos;re looking for doesn&apos;t exist. It might have been moved or deleted.
         </p>
         <Link href="/" passHref>
           <Button className="gap-2">

@@ -3,8 +3,7 @@
 import { notFound } from "next/navigation";
 import { getProjectBySlug } from "@/lib/data";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, ExternalLink, Maximize2, Calendar, User, Building } from "lucide-react";
+import { ArrowLeft, ExternalLink, Maximize2, Calendar } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -14,7 +13,6 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { CustomCursor } from "@/components/CustomCursor";
 import { EnhancedImageGallery } from "@/components/EnhancedImageGallery";
 import { SmartImageGallery } from "@/components/SmartImageGallery";
-import { ContentTabs } from "@/components/ContentTabs";
 import { LoadingPage } from "@/components/LoadingAnimation";
 import { BeforeAfterImageComparison } from "@/components/BeforeAfterImageComparison";
 import { PasswordProtection } from "@/components/PasswordProtection";
@@ -38,10 +36,10 @@ export default function ProjectPage({ params }: ProjectPageProps) {
     ...project.research.artifacts,
     // Include concept artifacts and parts
     ...project.concept.artifacts,
-    ...(project.concept.parts?.flatMap(part => part.artifacts) || []),
+    ...(project.concept.parts?.flatMap(part => part.artifacts) ?? []),
     // Include iteration artifacts and parts
     ...project.iteration.artifacts,
-    ...(project.iteration.parts?.flatMap(part => part.artifacts) || []),
+    ...(project.iteration.parts?.flatMap(part => part.artifacts) ?? []),
     ...project.finalProduct.artifacts,
   ].filter(Boolean);
 
@@ -92,7 +90,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
     );
   }
 
-  const ImageWithLightbox = ({ 
+  // const ImageWithLightbox = ({ 
     src, 
     alt, 
     className, 

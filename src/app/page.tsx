@@ -23,9 +23,7 @@ const Spline = dynamic(() => import("@splinetool/react-spline"), {
   ),
 });
 import Link from "next/link";
-import { cn, scrollTo } from "@/lib/utils";
-import Image from "next/image";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 
 import { motion } from "framer-motion";
@@ -293,7 +291,7 @@ export default function Home() {
                      {/* Projects Grid */}
            <div className="mt-14">
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-               {getFeaturedProjects().map((project, index) => (
+               {getFeaturedProjects().map((project) => (
                  <ProjectCard key={project.title} project={project} />
                ))}
              </div>

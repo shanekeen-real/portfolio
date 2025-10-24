@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { rateLimit, getClientIP } from '@/lib/rate-limit';
 
 // Store passwords securely using environment variables
@@ -25,7 +26,7 @@ export async function POST(request: NextRequest) {
       }, { status: 429 });
     }
     
-    const { project, password } = await request.json();
+    const { project, password } = await request.json() as { project: string; password: string };
     
     if (!project || !password) {
       return NextResponse.json({ success: false, error: 'Missing project or password' }, { status: 400 });
