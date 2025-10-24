@@ -3,7 +3,7 @@
 import { notFound } from "next/navigation";
 import { getProjectBySlug } from "@/lib/data";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ExternalLink, Maximize2, Calendar } from "lucide-react";
+import { ArrowLeft, ExternalLink, Calendar } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -90,7 +90,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
     );
   }
 
-  // const ImageWithLightbox = ({ 
+  /* const ImageWithLightbox = ({ 
     src, 
     alt, 
     className, 
@@ -133,7 +133,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         <Maximize2 className="h-4 w-4" />
       </button>
     </div>
-  );
+  ); */
 
   return (
     <div className="min-h-screen bg-background">

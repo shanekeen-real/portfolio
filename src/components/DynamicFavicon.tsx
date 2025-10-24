@@ -3,13 +3,15 @@
 import { useEffect } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
+/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
+
 export function DynamicFavicon() {
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     const updateFavicon = () => {
       // Get the favicon link element
-      let favicon = document.querySelector('link[rel="icon"]')! as HTMLLinkElement;
+      let favicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
       
       // If no favicon exists, create one
       if (!favicon) {
@@ -26,7 +28,7 @@ export function DynamicFavicon() {
       }
 
       // Also update apple-touch-icon if it exists
-      const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]')! as HTMLLinkElement;
+      const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]') as HTMLLinkElement;
       if (appleTouchIcon) {
         if (resolvedTheme === 'dark') {
           appleTouchIcon.href = '/favicon logo_white.png';
@@ -36,7 +38,7 @@ export function DynamicFavicon() {
       }
 
       // Update shortcut icon as well
-      const shortcutIcon = document.querySelector('link[rel="shortcut icon"]')! as HTMLLinkElement;
+      const shortcutIcon = document.querySelector('link[rel="shortcut icon"]') as HTMLLinkElement;
       if (shortcutIcon) {
         if (resolvedTheme === 'dark') {
           shortcutIcon.href = '/favicon logo_white.png';
@@ -57,7 +59,7 @@ export function DynamicFavicon() {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       
       // Get the favicon link element
-      const favicon = document.querySelector('link[rel="icon"]')! as HTMLLinkElement;
+      const favicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
       
       if (favicon) {
         // Set initial favicon based on system preference
