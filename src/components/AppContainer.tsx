@@ -84,24 +84,40 @@ export default function AppContainer(props: ContainerProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isReturning, setIsReturning] = useState<boolean>(false);
+  const [isNavVisible, setIsNavVisible] = useState<boolean>(true);
+  const [lastScrollY, setLastScrollY] = useState<number>(0);
   const pathname = usePathname();
 
   // Check if we're on a case study page
   const isCaseStudyPage = pathname.startsWith('/projects/');
   const isHomePage = pathname === '/';
 
-  // handle scroll
+  // handle scroll with hide/show functionality
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
+      const currentScrollY = window.scrollY;
+      
+      // Basic scrolled state for background
+      setIsScrolled(currentScrollY > 0);
+      
+      // Hide/show navigation based on scroll direction
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and past 100px - hide nav
+        setIsNavVisible(false);
+      } else {
+        // Scrolling up or at top - show nav
+        setIsNavVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [lastScrollY]);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -140,6 +156,8 @@ export default function AppContainer(props: ContainerProps) {
           isCaseStudyPage || isScrolled
             ? "bg-gradient-to-br from-background to-transparent border-b border-border backdrop-blur transition"
             : "bg-transparent",
+          "transition-transform duration-300 ease-in-out",
+          isNavVisible ? "translate-y-0" : "-translate-y-full"
         )}
       >
         <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">

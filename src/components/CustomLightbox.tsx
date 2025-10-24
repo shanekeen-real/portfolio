@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 
 interface CustomLightboxProps {
   isOpen: boolean;
@@ -13,11 +13,37 @@ interface CustomLightboxProps {
 
 export function CustomLightbox({ isOpen, onClose, images, initialIndex }: CustomLightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [zoom, setZoom] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const lightboxRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     setCurrentIndex(initialIndex);
+    // Reset zoom and position when changing images
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
   }, [initialIndex]);
+
+  // Reset zoom and position when opening/closing
+  useEffect(() => {
+    if (isOpen) {
+      setZoom(1);
+      setPosition({ x: 0, y: 0 });
+      // Prevent background scroll
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Restore background scroll
+      document.body.style.overflow = 'unset';
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -36,8 +62,20 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
       }
     };
 
+    const handleWheelGlobal = (e: WheelEvent) => {
+      if (isOpen) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener("wheel", handleWheelGlobal, { passive: false });
+    
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("wheel", handleWheelGlobal);
+    };
   }, [isOpen, currentIndex, onClose]);
 
   const goToPrevious = () => {
@@ -46,6 +84,75 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+  };
+
+  // Zoom functions
+  const zoomIn = () => {
+    setZoom(prev => Math.min(prev * 1.5, 5));
+  };
+
+  const zoomOut = () => {
+    setZoom(prev => Math.max(prev / 1.5, 0.5));
+  };
+
+  const resetZoom = () => {
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  // Handle mouse wheel zoom
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    if (e.deltaY < 0) {
+      zoomIn();
+    } else {
+      zoomOut();
+    }
+  };
+
+  // Handle mouse drag for panning
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoom > 1) {
+      setIsDragging(true);
+      setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && zoom > 1) {
+      setPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Handle touch events for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (zoom > 1 && e.touches.length === 1) {
+      setIsDragging(true);
+      setDragStart({ 
+        x: e.touches[0].clientX - position.x, 
+        y: e.touches[0].clientY - position.y 
+      });
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (isDragging && zoom > 1 && e.touches.length === 1) {
+      setPosition({
+        x: e.touches[0].clientX - dragStart.x,
+        y: e.touches[0].clientY - dragStart.y
+      });
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
@@ -81,28 +188,70 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
           {currentIndex + 1} of {images.length}
         </div>
 
+        {/* Zoom Controls */}
+        <div className="absolute top-4 right-16 z-10 flex items-center gap-2">
+          <button
+            onClick={zoomOut}
+            className="p-2 text-white hover:text-primary transition-colors duration-200 bg-black/20 hover:bg-black/40 rounded-full backdrop-blur-sm"
+            aria-label="Zoom out"
+          >
+            <ZoomOut className="h-5 w-5" />
+          </button>
+          <span className="text-white text-sm font-medium px-2">
+            {Math.round(zoom * 100)}%
+          </span>
+          <button
+            onClick={zoomIn}
+            className="p-2 text-white hover:text-primary transition-colors duration-200 bg-black/20 hover:bg-black/40 rounded-full backdrop-blur-sm"
+            aria-label="Zoom in"
+          >
+            <ZoomIn className="h-5 w-5" />
+          </button>
+          <button
+            onClick={resetZoom}
+            className="p-2 text-white hover:text-primary transition-colors duration-200 bg-black/20 hover:bg-black/40 rounded-full backdrop-blur-sm"
+            aria-label="Reset zoom"
+          >
+            <RotateCcw className="h-5 w-5" />
+          </button>
+        </div>
+
         {/* Main Image */}
-        <div className="flex items-center justify-center h-full p-8">
-          <motion.div
+        <div 
+          className="flex items-center justify-center h-full p-8 overflow-hidden"
+          onWheel={handleWheel}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+        >
+          <div
             key={currentIndex}
-            className="relative max-w-full max-h-full"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.3 }}
+            className="relative max-w-full max-h-full cursor-grab active:cursor-grabbing"
+            onMouseDown={handleMouseDown}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            style={{
+              transform: `scale(${zoom}) translate(${position.x}px, ${position.y}px)`,
+              transformOrigin: 'center center',
+              transition: isDragging ? 'none' : 'transform 0.2s ease-out',
+              opacity: 1
+            }}
           >
             <img
+              ref={imageRef}
               src={images[currentIndex]}
               alt={`Image ${currentIndex + 1}`}
-              className="max-w-full max-h-full object-contain"
+              className="max-w-full max-h-full object-contain select-none"
               style={{
                 width: "auto",
                 height: "auto",
                 maxWidth: "100vw",
                 maxHeight: "100vh",
               }}
+              draggable={false}
             />
-          </motion.div>
+          </div>
         </div>
 
         {/* Navigation Arrows */}

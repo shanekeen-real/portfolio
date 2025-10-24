@@ -13,9 +13,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { CustomCursor } from "@/components/CustomCursor";
 import { EnhancedImageGallery } from "@/components/EnhancedImageGallery";
+import { SmartImageGallery } from "@/components/SmartImageGallery";
 import { ContentTabs } from "@/components/ContentTabs";
 import { LoadingPage } from "@/components/LoadingAnimation";
 import { BeforeAfterImageComparison } from "@/components/BeforeAfterImageComparison";
+import { PasswordProtection } from "@/components/PasswordProtection";
 
 interface ProjectPageProps {
   params: {
@@ -47,6 +49,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [sectionImages, setSectionImages] = useState<string[]>(allImages);
+  const [isUnlocked, setIsUnlocked] = useState(false);
   const { scrollYProgress } = useScroll();
   
   // Move all useTransform calls to the top level
@@ -76,6 +79,17 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   // Show loading state after all hooks have been called
   if (isLoading) {
     return <LoadingPage text="Loading case study..." />;
+  }
+
+  // Password protection for Yellow Dollar project
+  if (project.slug === "yellow-dollar" && !isUnlocked) {
+    return (
+      <PasswordProtection 
+        onUnlock={() => setIsUnlocked(true)}
+        externalLink={project.externalLink}
+        project="yellow-dollar"
+      />
+    );
   }
 
   const ImageWithLightbox = ({ 
@@ -187,7 +201,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               className="space-y-10"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
             >
               <motion.div 
                 className="space-y-6"
@@ -198,7 +212,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+                  transition={{ duration: 0.3, delay: 0.05, ease: "easeOut" }}
                 >
                   <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
                     ✨ {project.subtitle}
@@ -217,7 +231,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 className="space-y-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.2, ease: "easeOut" }}
               >
                 <h3 className="text-lg font-semibold text-muted-foreground">Scope</h3>
                 <p className="text-base text-muted-foreground leading-relaxed">{project.scope}</p>
@@ -228,7 +242,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 className="flex flex-wrap gap-3"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.3, ease: "easeOut" }}
               >
                 {project.tools.map((tool, index) => (
                   <motion.span
@@ -237,8 +251,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     initial={{ opacity: 0, scale: 0.8, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     transition={{ 
-                      duration: 0.4, 
-                      delay: 0.6 + index * 0.1,
+                      duration: 0.2, 
+                      delay: 0.3 + index * 0.05,
                       type: "spring",
                       stiffness: 200
                     }}
@@ -247,8 +261,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                       y: -3,
                       rotate: [0, -2, 2, 0],
                       transition: { 
-                        duration: 0.3,
-                        rotate: { duration: 0.6, repeat: Infinity, repeatType: "reverse" }
+                        duration: 0.15,
+                        rotate: { duration: 0.3, repeat: Infinity, repeatType: "reverse" }
                       }
                     }}
                     whileTap={{ scale: 0.95 }}
@@ -263,7 +277,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 className="flex items-center gap-4 pt-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.4, ease: "easeOut" }}
               >
                 <Calendar className="h-5 w-5 text-muted-foreground" />
                 <div>
@@ -356,7 +370,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
           >
             <h2 className="text-4xl font-bold tracking-tight">The Problem</h2>
           </motion.div>
@@ -385,7 +399,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
           >
             <h2 className="text-4xl font-bold tracking-tight">Research</h2>
           </motion.div>
@@ -434,7 +448,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
           >
             <h2 className="text-4xl font-bold tracking-tight">Concept</h2>
           </motion.div>
@@ -458,14 +472,14 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8, delay: 0.6 + (partIndex * 0.2), ease: "easeOut" }}
+                  transition={{ duration: 0.4, delay: 0.3 + (partIndex * 0.1), ease: "easeOut" }}
                 >
                   <motion.div 
                     className="space-y-6"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6, delay: 0.8 + (partIndex * 0.2), ease: "easeOut" }}
+                    transition={{ duration: 0.3, delay: 0.4 + (partIndex * 0.1), ease: "easeOut" }}
                   >
                     <h3 className="text-2xl font-semibold tracking-tight">{part.title}</h3>
                   </motion.div>
@@ -474,7 +488,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6, delay: 1.0 + (partIndex * 0.2), ease: "easeOut" }}
+                    transition={{ duration: 0.3, delay: 0.5 + (partIndex * 0.1), ease: "easeOut" }}
                   >
                     {part.description}
                   </motion.p>
@@ -484,18 +498,45 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                       initial={{ opacity: 0, y: 50 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.8, delay: 1.2 + (partIndex * 0.2), ease: "easeOut" }}
+                      transition={{ duration: 0.4, delay: 0.6 + (partIndex * 0.1), ease: "easeOut" }}
                     >
-                      <EnhancedImageGallery
-                        images={part.artifacts}
-                        alt={`${part.title} artifacts`}
-                        onImageClick={(index) => {
-                          openLightbox(index, part.artifacts);
-                        }}
-                        showThumbnails={true}
-                        autoPlay={false}
-                        sectionId={`concept-part-${partIndex}`}
-                      />
+                      {/* Use SmartImageGallery for app-related sections and website sections */}
+                      {(part.title.toLowerCase().includes('app') || part.title.toLowerCase().includes('mobile')) ? (
+                        <SmartImageGallery
+                          images={part.artifacts}
+                          alt={`${part.title} artifacts`}
+                          onImageClick={(index) => {
+                            openLightbox(index, part.artifacts);
+                          }}
+                          showThumbnails={true}
+                          autoPlay={false}
+                          sectionId={`concept-part-${partIndex}`}
+                          imageType="app"
+                        />
+                      ) : (part.title.toLowerCase().includes('wireframe') || part.title.toLowerCase().includes('development') || part.title.toLowerCase().includes('website') || part.title.toLowerCase().includes('interface')) ? (
+                        <SmartImageGallery
+                          images={part.artifacts}
+                          alt={`${part.title} artifacts`}
+                          onImageClick={(index) => {
+                            openLightbox(index, part.artifacts);
+                          }}
+                          showThumbnails={true}
+                          autoPlay={false}
+                          sectionId={`concept-part-${partIndex}`}
+                          imageType="interface"
+                        />
+                      ) : (
+                        <EnhancedImageGallery
+                          images={part.artifacts}
+                          alt={`${part.title} artifacts`}
+                          onImageClick={(index) => {
+                            openLightbox(index, part.artifacts);
+                          }}
+                          showThumbnails={true}
+                          autoPlay={false}
+                          sectionId={`concept-part-${partIndex}`}
+                        />
+                      )}
                     </motion.div>
                   )}
                 </motion.div>
@@ -503,24 +544,24 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             </div>
           ) : (
             project.concept.artifacts.length > 0 && (
-              <motion.div 
-                className="pt-12"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-              >
-                <EnhancedImageGallery
-                  images={project.concept.artifacts}
-                  alt="Concept artifacts"
-                  onImageClick={(index) => {
-                    openLightbox(index, project.concept.artifacts);
-                  }}
-                  showThumbnails={true}
-                  autoPlay={false}
-                  sectionId="concept"
-                />
-              </motion.div>
+            <motion.div 
+              className="pt-12"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            >
+              <EnhancedImageGallery
+                images={project.concept.artifacts}
+                alt="Concept artifacts"
+                onImageClick={(index) => {
+                  openLightbox(index, project.concept.artifacts);
+                }}
+                showThumbnails={true}
+                autoPlay={false}
+                sectionId="concept"
+              />
+            </motion.div>
             )
           )}
         </motion.section>
@@ -539,7 +580,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
           >
             <h2 className="text-4xl font-bold tracking-tight">Iteration</h2>
           </motion.div>
@@ -563,14 +604,14 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8, delay: 0.6 + (partIndex * 0.2), ease: "easeOut" }}
+                  transition={{ duration: 0.4, delay: 0.3 + (partIndex * 0.1), ease: "easeOut" }}
                 >
                   <motion.div 
                     className="space-y-6"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6, delay: 0.8 + (partIndex * 0.2), ease: "easeOut" }}
+                    transition={{ duration: 0.3, delay: 0.4 + (partIndex * 0.1), ease: "easeOut" }}
                   >
                     <h3 className="text-2xl font-semibold tracking-tight">{part.title}</h3>
                   </motion.div>
@@ -579,7 +620,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6, delay: 1.0 + (partIndex * 0.2), ease: "easeOut" }}
+                    transition={{ duration: 0.3, delay: 0.5 + (partIndex * 0.1), ease: "easeOut" }}
                   >
                     {part.description}
                   </motion.p>
@@ -591,7 +632,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                       initial={{ opacity: 0, y: 50 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.8, delay: 1.2 + (partIndex * 0.2), ease: "easeOut" }}
+                      transition={{ duration: 0.4, delay: 0.6 + (partIndex * 0.1), ease: "easeOut" }}
                     >
                       <BeforeAfterImageComparison
                         beforeImage={part.comparison.beforeImage}
@@ -609,18 +650,45 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                       initial={{ opacity: 0, y: 50 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.8, delay: 1.2 + (partIndex * 0.2), ease: "easeOut" }}
+                      transition={{ duration: 0.4, delay: 0.6 + (partIndex * 0.1), ease: "easeOut" }}
                     >
-                      <EnhancedImageGallery
-                        images={part.artifacts}
-                        alt={`${part.title} artifacts`}
-                        onImageClick={(index) => {
-                          openLightbox(index, part.artifacts);
-                        }}
-                        showThumbnails={true}
-                        autoPlay={false}
-                        sectionId={`iteration-part-${partIndex}`}
-                      />
+                      {/* Use SmartImageGallery for app-related sections and website sections */}
+                      {(part.title.toLowerCase().includes('app') || part.title.toLowerCase().includes('mobile')) ? (
+                        <SmartImageGallery
+                          images={part.artifacts}
+                          alt={`${part.title} artifacts`}
+                          onImageClick={(index) => {
+                            openLightbox(index, part.artifacts);
+                          }}
+                          showThumbnails={true}
+                          autoPlay={false}
+                          sectionId={`iteration-part-${partIndex}`}
+                          imageType="app"
+                        />
+                      ) : (part.title.toLowerCase().includes('wireframe') || part.title.toLowerCase().includes('development') || part.title.toLowerCase().includes('website') || part.title.toLowerCase().includes('interface')) ? (
+                        <SmartImageGallery
+                          images={part.artifacts}
+                          alt={`${part.title} artifacts`}
+                          onImageClick={(index) => {
+                            openLightbox(index, part.artifacts);
+                          }}
+                          showThumbnails={true}
+                          autoPlay={false}
+                          sectionId={`iteration-part-${partIndex}`}
+                          imageType="interface"
+                        />
+                      ) : (
+                        <EnhancedImageGallery
+                          images={part.artifacts}
+                          alt={`${part.title} artifacts`}
+                          onImageClick={(index) => {
+                            openLightbox(index, part.artifacts);
+                          }}
+                          showThumbnails={true}
+                          autoPlay={false}
+                          sectionId={`iteration-part-${partIndex}`}
+                        />
+                      )}
                     </motion.div>
                   )}
                 </motion.div>
@@ -628,24 +696,24 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             </div>
           ) : (
             project.iteration.artifacts.length > 0 && (
-              <motion.div 
-                className="pt-12"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-              >
-                <EnhancedImageGallery
-                  images={project.iteration.artifacts}
-                  alt="Iteration artifacts"
-                  onImageClick={(index) => {
-                    openLightbox(index, project.iteration.artifacts);
-                  }}
-                  showThumbnails={true}
-                  autoPlay={false}
-                  sectionId="iteration"
-                />
-              </motion.div>
+            <motion.div 
+              className="pt-12"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            >
+              <EnhancedImageGallery
+                images={project.iteration.artifacts}
+                alt="Iteration artifacts"
+                onImageClick={(index) => {
+                  openLightbox(index, project.iteration.artifacts);
+                }}
+                showThumbnails={true}
+                autoPlay={false}
+                sectionId="iteration"
+              />
+            </motion.div>
             )
           )}
         </motion.section>
@@ -664,7 +732,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
           >
             <h2 className="text-4xl font-bold tracking-tight">Final Product</h2>
           </motion.div>
@@ -713,7 +781,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
           >
             <h2 className="text-4xl font-bold tracking-tight">Outcome & Impact</h2>
           </motion.div>
@@ -817,14 +885,14 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
           >
             {/* Back to Projects Button */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
             >
               <Link href="/#projects" passHref className="text-muted-foreground hover:text-foreground">
                 <Button variant="outline" className="gap-3 px-6 py-3 transition-all duration-200">
@@ -840,7 +908,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.2, ease: "easeOut" }}
               >
                 <Link href={project.externalLink} target="_blank" passHref>
                   <Button className="gap-3 px-6 py-3 hover:bg-primary/90 transition-all duration-200">

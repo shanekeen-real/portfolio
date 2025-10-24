@@ -85,14 +85,48 @@ export const projects: Project[] = [
         "/assets/unqueue-design-1.svg",
         "/assets/unqueue-design-2.svg",
         "/assets/unqueue-design-3.svg"
+      ],
+      parts: [
+        {
+          title: "AI Dashboard Design",
+          description: "Created an intuitive dashboard interface that allows YouTube creators to upload and analyze their content for potential policy violations. The design focuses on clear visual indicators and actionable insights to help creators optimize their content before publishing.",
+          artifacts: [
+            "/assets/unqueue-design-1.svg",
+            "/assets/unqueue-design-2.svg"
+          ]
+        },
+        {
+          title: "User Experience Flow",
+          description: "Developed a comprehensive user experience flow that guides creators through the content analysis process, from upload to optimization recommendations. The flow ensures creators understand each step and can easily implement suggested changes.",
+          artifacts: [
+            "/assets/unqueue-design-3.svg"
+          ]
+        }
       ]
     },
     iteration: {
-      description: "Iterative development of the AI analysis engine with continuous testing on real YouTube content to improve accuracy and reduce false positives.",
+      description: "The development process focused on iterative improvement of the AI analysis engine through continuous testing and user feedback.",
       artifacts: [
         "/assets/unqueue-design-1.svg",
         "/assets/unqueue-design-2.svg",
         "/assets/unqueue-design-3.svg"
+      ],
+      parts: [
+        {
+          title: "AI Engine Development",
+          description: "Developed and refined the core AI analysis engine through extensive testing on real YouTube content. This phase focused on improving accuracy and reducing false positives by training the system on diverse content types and policy scenarios.",
+          artifacts: [
+            "/assets/unqueue-design-1.svg"
+          ]
+        },
+        {
+          title: "User Interface Refinement",
+          description: "Continuously improved the user interface based on creator feedback and usage analytics. This iterative process ensured the dashboard remained intuitive while adding more sophisticated analysis features and clearer result presentations.",
+          artifacts: [
+            "/assets/unqueue-design-2.svg",
+            "/assets/unqueue-design-3.svg"
+          ]
+        }
       ]
     },
     finalProduct: {
@@ -235,8 +269,16 @@ export const projects: Project[] = [
           ]
         },
         {
-          title: "Final Iteration & 3D Integration",
-          description: "Once satisfied with the layout and user flow, I developed the final designs by adding content and experimenting with branding elements. I integrated 3D design using Blender and Cinema 4D to create an environment that replicated how the platform could look if further developed.",
+          title: "3D Integration",
+          description: "Integrated 3D design using Blender and Cinema 4D to create an immersive environment that replicated how the platform could look if further developed. This phase focused on creating engaging visual elements that enhance the overall user experience in the metaverse platform.",
+          artifacts: [
+            "/assets/casestudies_photos/kickoff/development/3dev.png",
+            "/assets/casestudies_photos/kickoff/development/3devcharacters.png"
+          ]
+        },
+        {
+          title: "Final Iteration",
+          description: "Once satisfied with the layout and user flow, I developed the final designs by adding content and experimenting with branding elements. This phase focused on creating polished interfaces that would provide users with an engaging social metaverse experience for watching football matches.",
           artifacts: [
             "/assets/casestudies_photos/kickoff/development/v2/landing3.png",
             "/assets/casestudies_photos/kickoff/development/v2/dashboard3.png",
@@ -245,9 +287,7 @@ export const projects: Project[] = [
             "/assets/casestudies_photos/kickoff/development/v2/leaderboard3.png",
             "/assets/casestudies_photos/kickoff/development/v2/livematch3.png",
             "/assets/casestudies_photos/kickoff/development/v2/map3.png",
-            "/assets/casestudies_photos/kickoff/development/v2/plan3.png",
-            "/assets/casestudies_photos/kickoff/development/3dev.png",
-            "/assets/casestudies_photos/kickoff/development/3devcharacters.png"
+            "/assets/casestudies_photos/kickoff/development/v2/plan3.png"
           ]
         }
       ]
@@ -280,15 +320,13 @@ export const projects: Project[] = [
     timeline: "4 weeks",
     tools: ["Figma", "Framer", "Adobe XD", "Sketch", "InVision"],
     coverImage: "/assets/Aurora Roodfing.png",
-    heroImage: "/assets/infinitevps-hero.svg",
+    heroImage: "/assets/casestudies_photos/aurora/mockups/1.jpg",
     scope: "UI/UX Design, Branding, Research, Wireframing, Prototyping, Responsive Web Design & SEO",
     problem: "In the roofing industry, outdated websites cost revenue and visibility. I designed a mobile-responsive site that streamlined user journeys, amplified CTAs, and showcased services boosting conversions by 30% through enhanced SEO and UX.",
     research: {
       description: "Through stakeholder interviews and competitor analysis, I identified key UX patterns and conversion barriers across ~10 roofing websites. These actionable insights directly informed high-fidelity wireframes that met client expectations for usability and conversion optimization.",
       artifacts: [
-        "/assets/infinitevps-research-1.svg",
-        "/assets/infinitevps-research-2.svg",
-        "/assets/infinitevps-research-3.svg"
+        "/assets/casestudies_photos/aurora/keytakeaways.png"
       ]
     },
     concept: {
@@ -297,35 +335,72 @@ export const projects: Project[] = [
         "/assets/infinitevps-dashboard-wireframes.svg",
         "/assets/infinitevps-monitoring-ui.svg",
         "/assets/infinitevps-pain-points.svg"
+      ],
+      parts: [
+        {
+          title: "Website Architecture & Wireframes",
+          description: "Developed a comprehensive 5-page website architecture focusing on user conversion paths and service showcase. Created detailed wireframes that prioritized user experience and conversion optimization for the roofing industry.",
+          artifacts: [
+            "/assets/casestudies_photos/aurora/wireframes/landingwireframe.png",
+            "/assets/casestudies_photos/aurora/wireframes/aboutwireframe.png",
+            "/assets/casestudies_photos/aurora/wireframes/contactwireframe.png"
+          ]
+        },
+        {
+          title: "Mobile Responsive Wireframes",
+          description: "Created mobile-specific wireframes to ensure optimal user experience across all devices. These wireframes addressed the unique challenges of mobile browsing for roofing services and optimized the user journey for mobile users.",
+          artifacts: [
+            "/assets/casestudies_photos/aurora/wireframes/landingwireframemobile1.png",
+            "/assets/casestudies_photos/aurora/wireframes/landingwireframemobile2.png"
+          ]
+        }
       ]
     },
     iteration: {
-      description: "Using a structured 0-1 design sprint framework, I conducted 3 prioritised feedback sessions with stakeholders to refine wireframes. This iterative process resolved usability conflicts early, ensuring the final UI aligned with both user needs and business goals through rapid prototyping, iteration and validation. From here I was able to replicate this process with the initial wireframe drafts for the mobile versions, upon which I iterated and developed based on the feedback I received at the testing intervals of the project. After finalizing brand guidelines, I utilised Figma's component system to implement the approved design language across all 5 website pages. This maintained consistent visual execution throughout every interface element, ready for development. During the final Framer implementation phase, I conducted structured typography and metadata experiments to maximize SEO performance. Through collaborative workshops with stakeholders, we optimized heading hierarchies and semantic mark-up, resulting in a technically polished launch that enhanced organic discoverability.",
+      description: "The development process followed a structured design sprint framework with multiple stakeholder feedback sessions to ensure optimal user experience and business alignment.",
       artifacts: [
         "/assets/infinitevps-user-journey.svg",
         "/assets/infinitevps-final-dashboard.svg",
         "/assets/infinitevps-monitoring-ui.svg"
+      ],
+      parts: [
+        {
+          title: "Development & Testing",
+          description: "Frequent user testing sessions were conducted with stakeholders to ensure both the website features and design were aligned with user expectations. This phase focused on refining layouts and validating user flows before moving to higher fidelity designs.",
+          artifacts: [
+            "/assets/casestudies_photos/aurora/development/homev2.png",
+            "/assets/casestudies_photos/aurora/development/aboutv2.png",
+            "/assets/casestudies_photos/aurora/development/contactv2.png"
+          ]
+        },
+        {
+          title: "Final Iteration & Visual Polish",
+          description: "Once satisfied with the layout and user flow, I developed the final designs by adding content and experimenting with branding elements. Created comprehensive mockups showcasing the professional aesthetic and user-friendly interface that drives conversions and enhances brand awareness.",
+          artifacts: [
+            "/assets/casestudies_photos/aurora/mockups/2.jpg",
+            "/assets/casestudies_photos/aurora/mockups/3.jpg",
+            "/assets/casestudies_photos/aurora/mockups/4.jpg"
+          ]
+        }
       ]
     },
     finalProduct: {
       description: "4 Week Design Process / Solo Project / 2024.",
       artifacts: [
-        "/assets/infinitevps-final-dashboard.svg",
-        "/assets/infinitevps-monitoring-ui.svg",
-        "/assets/infinitevps-dashboard-wireframes.svg"
+        "/assets/casestudies_photos/aurora/mockups/1.jpg"
       ]
     },
     outcome: {
-      description: "The platform successfully onboarded 500+ enterprise clients and achieved 95% user satisfaction scores.",
+      description: "The responsive website design successfully modernized the roofing company's online presence, creating a website that enhanced user experience and improved conversion potential through better UX and SEO optimization.",
       metrics: [
         "30% boost in conversions through enhanced UX",
-        "Improved SEO performance and organic discoverability",
+        "Improved SEO performance and organic discoverability", 
         "Enhanced customer retention and brand awareness"
       ],
       learnings: [
         "Structured design sprints with stakeholder feedback are crucial for business alignment",
-        "Component systems ensure consistent visual execution across all pages",
-        "SEO optimization should be integrated throughout the design process"
+        "Mobile-responsive design is essential for roofing industry customers who often browse on mobile devices",
+        "SEO optimization should be integrated throughout the design process for local service businesses"
       ]
     },
     featured: true
@@ -342,15 +417,13 @@ export const projects: Project[] = [
     timeline: "12 weeks",
     tools: ["Adobe XD", "Photoshop", "Cinema 4D", "Figma"],
     coverImage: "/assets/Gucci.png",
-    heroImage: "/assets/wrona-hero.svg",
+    heroImage: "/assets/casestudies_photos/gucci/mockups/meet guccibot.png",
     scope: "UI/UX Design, 3D Design, App Design, Wireframing, Research & Prototyping",
     problem: "In response to the significant decline in physical retail purchases, this project was aimed at revitalizing in-store experiences to motivate customers to return to physical locations.",
     research: {
       description: "I conducted both primary and secondary research into the Gucci brand design and from this I decided I would keep with the traditional Gucci aesthetic and brand material. I also undertook surveys and interviews with the Gucci customer base to realize their pain points with the company and their current experience. Alongside this, I performed an in-person analysis of the store and its different components, where I created a service blueprint map to help me find where the room for improvement and opportunity was.",
       artifacts: [
-        "/assets/wrona-research-1.svg",
-        "/assets/wrona-research-2.svg",
-        "/assets/wrona-research-3.svg"
+        "/assets/casestudies_photos/gucci/research/researchtakeaways.png"
       ]
     },
     concept: {
@@ -359,30 +432,140 @@ export const projects: Project[] = [
         "/assets/wrona-competitor-analysis.svg",
         "/assets/wrona-stakeholder-interviews.svg",
         "/assets/wrona-design-system.svg"
-      ]
+      ],
+      parts: []
     },
     iteration: {
-      description: "As with all projects, I started by creating wireframes, for both the physical interface and the app interface. It was important to maintain a consistent aesthetic across both the mobile and physical interfaces so in this early stage I decided on using a box layout with matching typography and colour. From here I was able to keep developing and refining each screen, experimenting with different variations of content and typography. I followed a similar process for the app design, using user feedback from testing sessions as a metric for gradual improvement with each iteration.",
+      description: "The development process focused on creating consistent experiences across both physical and digital interfaces while maintaining Gucci's brand aesthetic.",
       artifacts: [
         "/assets/wrona-3d-mockups.svg",
         "/assets/wrona-final-website.svg",
         "/assets/wrona-design-system.svg"
+      ],
+      parts: [
+        {
+          title: "Physical Interface Wireframes",
+          description: "Designed wireframes for the physical in-store interface that customers would interact with. These wireframes defined the touchpoints between the digital app and the physical store experience, creating a seamless omnichannel journey.",
+          artifacts: [
+            "/assets/casestudies_photos/gucci/wireframes/interface/Gucci Interface - Home – 2.png",
+            "/assets/casestudies_photos/gucci/wireframes/interface/Gucci Interface - Browse – 1.png",
+            "/assets/casestudies_photos/gucci/wireframes/interface/Gucci Interface - Handbags – 1.png",
+            "/assets/casestudies_photos/gucci/wireframes/interface/Gucci Interface - Item-Product – 3.png",
+            "/assets/casestudies_photos/gucci/wireframes/interface/Gucci Interface -Escort– 2.png",
+            "/assets/casestudies_photos/gucci/wireframes/interface/Gucci Interface - Escort-Purchase Confirmation.png"
+          ]
+        },
+        {
+          title: "App Wireframes",
+          description: "Created comprehensive wireframes for the Guccibot mobile app, focusing on user interaction flows and chatbot functionality. These wireframes established the foundation for the in-store digital experience and defined how customers would interact with the AI assistant.",
+          artifacts: [
+            "/assets/casestudies_photos/gucci/wireframes/app/MyGucci app home screen – 1.png",
+            "/assets/casestudies_photos/gucci/wireframes/app/Guccibot Homepage - alternate layout.png",
+            "/assets/casestudies_photos/gucci/wireframes/app/Guccibot Chat.png",
+            "/assets/casestudies_photos/gucci/wireframes/app/My Cart.png",
+            "/assets/casestudies_photos/gucci/wireframes/app/My Orders.png",
+            "/assets/casestudies_photos/gucci/wireframes/app/Personalise Guccibot.png",
+            "/assets/casestudies_photos/gucci/wireframes/app/Settings.png"
+          ]
+        },
+        {
+          title: "App Development & Testing",
+          description: "Developed high-fidelity designs for the Guccibot mobile app, focusing on chatbot interactions and personalized shopping experiences. Conducted extensive user testing sessions to refine the app interface and ensure optimal user experience for mobile users.",
+          artifacts: [
+            "/assets/casestudies_photos/gucci/development/app/Guccibot - My Cart – 12.png",
+            "/assets/casestudies_photos/gucci/development/app/Guccibot - My Cart – 13.png",
+            "/assets/casestudies_photos/gucci/development/app/Guccibot - My Account (orders) – 4.png",
+            "/assets/casestudies_photos/gucci/development/app/Guccibot - My Orders – 4.png",
+            "/assets/casestudies_photos/gucci/development/app/Guccibot - Personalise Guccibot – 7.png",
+            "/assets/casestudies_photos/gucci/development/app/Guccibot - Personalise Guccibot – 8.png",
+            "/assets/casestudies_photos/gucci/development/app/Guccibot - Settings – 5.png",
+            "/assets/casestudies_photos/gucci/development/app/Guccibot - Chatbot – 3.png",
+            "/assets/casestudies_photos/gucci/development/app/MyGucci app home screen – 7.png"
+          ]
+        },
+        {
+          title: "Physical Interface Development & Testing",
+          description: "Designed and tested the physical in-store interface that customers would interact with. This phase focused on creating seamless interactions between the digital app and physical store touchpoints, ensuring a cohesive omnichannel experience.",
+          artifacts: [
+            "/assets/casestudies_photos/gucci/development/interface/Gucci Interface - Browse – 9.png",
+            "/assets/casestudies_photos/gucci/development/interface/Gucci Interface - Escort – 6.png",
+            "/assets/casestudies_photos/gucci/development/interface/Gucci Interface - Handbags – 5.png",
+            "/assets/casestudies_photos/gucci/development/interface/Gucci Interface - Item-Product – 13.png",
+            "/assets/casestudies_photos/gucci/development/interface/Gucci Interface - Purchase Item-Product – 3.png",
+            "/assets/casestudies_photos/gucci/development/interface/Gucci Interface - Settings – 5.png"
+          ]
+        },
+        {
+          title: "Final App Implementation",
+          description: "Developed the final app designs with complete functionality including chatbot interactions, personalized shopping experiences, and seamless user flows. This phase focused on creating intuitive interfaces for cart management, order tracking, and AI-powered product recommendations.",
+          artifacts: [
+            "/assets/casestudies_photos/gucci/final screens/app/Guccibot - Chatbot – 10.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Guccibot - Chatbot – 11.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Guccibot - Chatbot – 12.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Guccibot - Chatbot – 9.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Guccibot - Home (alternate layout) – 2.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Guccibot - My Cart – 10.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Guccibot - My Cart – 11.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Guccibot - Notification – 23.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Guccibot - Personalise Guccibot – 17.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Guccibot - Settings – 3.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Guccibot - Settings – 4.png",
+            "/assets/casestudies_photos/gucci/final screens/app/MyGucci app home screen – 6.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Onboarding – 11.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Onboarding – 12.png",
+            "/assets/casestudies_photos/gucci/final screens/app/Onboarding – 13.png"
+          ]
+        },
+        {
+          title: "Final Interface Implementation",
+          description: "Completed the physical in-store interface design with all interactive touchpoints and seamless integration with the mobile app. This phase focused on creating immersive shopping experiences and ensuring smooth transitions between digital and physical interactions.",
+          artifacts: [
+            "/assets/casestudies_photos/gucci/final screens/interface/Gucci Interface - Escort – 3.png",
+            "/assets/casestudies_photos/gucci/final screens/interface/Gucci Interface - Escort – 4.png",
+            "/assets/casestudies_photos/gucci/final screens/interface/Gucci Interface - Follow me – 10.png",
+            "/assets/casestudies_photos/gucci/final screens/interface/Gucci Interface - Follow me – 5.png",
+            "/assets/casestudies_photos/gucci/final screens/interface/Gucci Interface - Handbags – 3.png",
+            "/assets/casestudies_photos/gucci/final screens/interface/Gucci Interface - Home – 8.png",
+            "/assets/casestudies_photos/gucci/final screens/interface/Gucci Interface - Item-Product – 10.png",
+            "/assets/casestudies_photos/gucci/final screens/interface/Gucci Interface - Purchase Item-Product – 2.png",
+            "/assets/casestudies_photos/gucci/final screens/interface/Gucci Interface - Settings – 3.png"
+          ]
+        },
+        {
+          title: "3D Integration & Immersive Experience",
+          description: "Integrated 3D design using Blender and Cinema 4D to create an immersive shopping environment that replicated how the Guccibot experience could look if further developed. This phase focused on creating engaging visual elements that enhance the overall shopping experience.",
+          artifacts: [
+            "/assets/casestudies_photos/gucci/development/3d dev.png"
+          ]
+        },
+        {
+          title: "Wireframe → Higher Fidelity",
+          description: "This comparison shows the evolution from initial wireframes to the first iteration of higher fidelity designs. Drag the slider to see how the basic layouts were enhanced with visual elements, typography, and improved user interface components.",
+          artifacts: [],
+          comparison: {
+            beforeImage: "/assets/casestudies_photos/gucci/wireframes/interface/Gucci Interface -Escort– 2.png",
+            afterImage: "/assets/casestudies_photos/gucci/final screens/interface/Gucci Interface - Escort – 3.png",
+            beforeAlt: "Gucci Interface Escort wireframe",
+            afterAlt: "Gucci Interface Escort higher fidelity design"
+          }
+        }
       ]
     },
     finalProduct: {
       description: "12 Week Design Process / Solo Project / 2023.",
       artifacts: [
-        "/assets/wrona-final-website.svg",
-        "/assets/wrona-3d-mockups.svg",
-        "/assets/wrona-design-system.svg"
+        "/assets/casestudies_photos/gucci/mockups/1.jpg",
+        "/assets/casestudies_photos/gucci/mockups/2.jpg",
+        "/assets/casestudies_photos/gucci/mockups/3.jpg"
       ]
     },
     outcome: {
-      description: "The platform gained 100,000 users in the first year with high engagement rates and positive user feedback.",
+      description: "The Guccibot concept successfully addressed the challenge of declining physical retail visits by creating an innovative in-store experience that combines digital technology with luxury retail. The project demonstrated how AI-powered assistants and immersive 3D interfaces can revitalize brick-and-mortar shopping experiences.",
       learnings: [
-        "Maintaining brand consistency across physical and digital interfaces is crucial",
-        "User feedback from testing sessions drives iterative improvement",
-        "Physical retail experiences can be enhanced through digital innovation"
+        "Maintaining brand consistency across physical and digital interfaces is crucial for luxury retail",
+        "AI-powered in-store assistants can bridge the gap between digital convenience and physical experience",
+        "3D design integration creates immersive experiences that differentiate physical stores from online shopping",
+        "Omnichannel experiences require seamless app-to-store interface transitions"
       ]
     },
     featured: true
@@ -416,14 +599,48 @@ export const projects: Project[] = [
         "/assets/infinitevps-dashboard-wireframes.svg",
         "/assets/infinitevps-monitoring-ui.svg",
         "/assets/infinitevps-pain-points.svg"
+      ],
+      parts: [
+        {
+          title: "App Architecture & Wireframes",
+          description: "Developed the core app architecture focusing on social interaction and book management features. Created wireframes that prioritized user engagement and community building while maintaining a clean, content-focused design approach.",
+          artifacts: [
+            "/assets/infinitevps-dashboard-wireframes.svg"
+          ]
+        },
+        {
+          title: "User Experience & Interface Design",
+          description: "Designed intuitive interfaces for book discovery, rating systems, and social features. Focused on creating seamless user experiences that encourage community interaction and book sharing among readers.",
+          artifacts: [
+            "/assets/infinitevps-monitoring-ui.svg",
+            "/assets/infinitevps-pain-points.svg"
+          ]
+        }
       ]
     },
     iteration: {
-      description: "I started the development process by creating a user journey, depicting the different sections of the app. After iterating and refining, this naturally progressed into sketching out some initial wireframes for how the platform could look. These are the initial wireframes I sketched out for the app concept. My aim was to create a clean and simple layout to allow the content to have the user's full attention. Initially I opted to have the book covers appear full size but after some user testing I came to the decision to alter the scale of the 'highlighted' title - enabling a greater user experience. Whilst user testing I continued to iterate and develop the different sections of the app, concluding the design by implementing the different design elements and content.",
+      description: "The development process focused on creating an intuitive user experience through iterative design and user testing to optimize content presentation and social features.",
       artifacts: [
         "/assets/infinitevps-user-journey.svg",
         "/assets/infinitevps-final-dashboard.svg",
         "/assets/infinitevps-monitoring-ui.svg"
+      ],
+      parts: [
+        {
+          title: "User Journey & Initial Wireframes",
+          description: "Created comprehensive user journeys depicting different app sections and user flows. Developed initial wireframes with a focus on clean, simple layouts that allow content to have the user's full attention, prioritizing readability and social interaction.",
+          artifacts: [
+            "/assets/infinitevps-user-journey.svg"
+          ]
+        },
+        {
+          title: "User Testing & Content Optimization",
+          description: "Conducted extensive user testing to refine the app's content presentation. Initially designed book covers at full size, but user feedback led to scaling adjustments for highlighted titles, significantly improving user experience. Continued iterating on different app sections based on testing results.",
+          artifacts: [
+            "/assets/infinitevps-final-dashboard.svg",
+            "/assets/infinitevps-monitoring-ui.svg"
+          ]
+        }
       ]
     },
     finalProduct: {
