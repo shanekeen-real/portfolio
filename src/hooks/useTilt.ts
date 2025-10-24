@@ -7,7 +7,7 @@ interface TiltOptions {
   scale?: number;
   speed?: number;
   transition?: boolean;
-  axis?: string | null;
+  axis?: "x" | "y" | null;
   reset?: boolean;
   easing?: string;
   glare?: boolean;
@@ -45,10 +45,10 @@ export const useTilt = (options: TiltOptions = {}) => {
       gyroscopeMinAngleY: -45,
       gyroscopeMaxAngleY: 45,
       ...options,
-    });
+    }) as any;
 
     return () => {
-      if (tiltInstance) {
+      if (tiltInstance && typeof tiltInstance.destroy === 'function') {
         tiltInstance.destroy();
       }
     };
