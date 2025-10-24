@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Maximize2, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React from "react";
@@ -50,7 +50,7 @@ export function EnhancedImageGallery({
     }, interval);
 
     return () => clearInterval(timer);
-  }, [autoPlay, isPlaying, interval, images.length]);
+  }, [autoPlay, isPlaying, interval, images.length, nextImage]);
 
   const toggleAutoPlay = () => {
     setIsPlaying(!isPlaying);
@@ -71,7 +71,7 @@ export function EnhancedImageGallery({
           className="relative aspect-video overflow-hidden rounded-xl border border-border/50"
         >
           <Image
-            src={images[currentIndex] || ''}
+            src={images[currentIndex] ?? ''}
             alt={`${alt} ${currentIndex + 1}`}
             fill
             className="object-cover transition-transform duration-500"

@@ -27,7 +27,7 @@ export default function Footer() {
       // Get the current timezone and extract just the city/region part
       const timezoneAbbr = Intl.DateTimeFormat().resolvedOptions().timeZone;
       // Remove continent prefix (e.g., "Europe/London" -> "London")
-      const cityName = timezoneAbbr.split('/').pop() || timezoneAbbr;
+      const cityName = timezoneAbbr.split('/').pop() ?? timezoneAbbr;
       setTimezone(cityName);
     };
 

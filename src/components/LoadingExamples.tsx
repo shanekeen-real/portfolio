@@ -1,6 +1,6 @@
 "use client";
 
-import { LoadingAnimation, LoadingSpinner, LoadingWithText, LoadingButton, LoadingPage, LoadingCard, LoadingInline } from "./LoadingAnimation";
+import { LoadingSpinner, LoadingWithText, LoadingButton, LoadingCard, LoadingInline } from "./LoadingAnimation";
 
 // This file demonstrates how to use the LoadingAnimation component throughout your portfolio
 // The component now uses a beautiful CSS-based cube grid animation
