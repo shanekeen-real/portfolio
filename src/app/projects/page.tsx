@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { projects } from "@/lib/data";
@@ -12,7 +12,7 @@ import { CustomCursor } from "@/components/CustomCursor";
 
 export default function ProjectsPage() {
   const refScrollContainer = useRef(null);
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [, setIsScrolled] = useState<boolean>(false);
 
   // handle scroll
   useEffect(() => {

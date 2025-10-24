@@ -10,7 +10,6 @@ import {
   SearchCheck,
   Eye,
   MonitorSmartphone,
-  ExternalLink,
 } from "lucide-react";
 import { TriangleDownIcon } from "@radix-ui/react-icons";
 import dynamic from "next/dynamic";

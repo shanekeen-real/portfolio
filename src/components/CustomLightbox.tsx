@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
@@ -46,13 +46,13 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
     };
   }, [isOpen]);
 
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
-  };
+  }, [images.length]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
-  };
+  }, [images.length]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -247,7 +247,7 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
           >
             <Image
               ref={imageRef}
-              src={images[currentIndex] || ''}
+              src={images[currentIndex] ?? ''}
               alt={`Image ${currentIndex + 1}`}
               className="max-w-full max-h-full object-contain select-none"
               fill
