@@ -46,6 +46,14 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
     };
   }, [isOpen]);
 
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
@@ -78,14 +86,6 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
       document.removeEventListener("wheel", handleWheelGlobal);
     };
   }, [isOpen, currentIndex, onClose, goToNext, goToPrevious]);
-
-  const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
-  };
-
-  const goToNext = () => {
-    setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
-  };
 
   // Zoom functions
   const zoomIn = () => {
@@ -247,7 +247,7 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
           >
             <Image
               ref={imageRef}
-              src={images[currentIndex]}
+              src={images[currentIndex] || ''}
               alt={`Image ${currentIndex + 1}`}
               className="max-w-full max-h-full object-contain select-none"
               fill
