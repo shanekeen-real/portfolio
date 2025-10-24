@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 
 interface CustomLightboxProps {
@@ -76,7 +77,7 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("wheel", handleWheelGlobal);
     };
-  }, [isOpen, currentIndex, onClose]);
+  }, [isOpen, currentIndex, onClose, goToNext, goToPrevious]);
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
@@ -244,11 +245,12 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
               opacity: 1
             }}
           >
-            <img
+            <Image
               ref={imageRef}
               src={images[currentIndex]}
               alt={`Image ${currentIndex + 1}`}
               className="max-w-full max-h-full object-contain select-none"
+              fill
               style={{
                 width: "auto",
                 height: "auto",
@@ -294,10 +296,12 @@ export function CustomLightbox({ isOpen, onClose, images, initialIndex }: Custom
                     : "border-white/30 hover:bg-accent hover:text-accent-foreground"
                 }`}
               >
-                <img
+                <Image
                   src={image}
                   alt={`Thumbnail ${index + 1}`}
                   className="w-full h-full object-cover"
+                  width={64}
+                  height={64}
                 />
               </button>
             ))}

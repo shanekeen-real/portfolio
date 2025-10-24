@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
 
 interface Tab {
   id: string;
@@ -18,7 +17,7 @@ interface ContentTabsProps {
 }
 
 export function ContentTabs({ tabs, defaultTab, className = "" }: ContentTabsProps) {
-  const [activeTab, setActiveTab] = useState(defaultTab || tabs[0]?.id);
+  const [activeTab, setActiveTab] = useState(defaultTab ?? tabs[0]?.id);
 
   const handleTabChange = (tabId: string) => {
     setActiveTab(tabId);
