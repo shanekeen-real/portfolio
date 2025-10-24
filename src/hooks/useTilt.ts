@@ -34,7 +34,6 @@ export const useTilt = (options: TiltOptions = {}) => {
       scale: 1.05,
       speed: 1000,
       transition: true,
-      axis: undefined,
       reset: true,
       easing: 'cubic-bezier(.03,.98,.52,.99)',
       glare: false,
