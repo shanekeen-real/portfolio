@@ -69,6 +69,8 @@ export function InteractiveMetrics({ metrics, title, description }: InteractiveM
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.98 }}
           >
             <Card
               className={`overflow-hidden border transition-all duration-300 cursor-pointer group ${
@@ -77,8 +79,6 @@ export function InteractiveMetrics({ metrics, title, description }: InteractiveM
                   : "border-border/50 hover:border-primary/40 hover:bg-muted/20 hover:scale-[1.02]"
               }`}
               onClick={() => setSelectedMetric(selectedMetric === metric.id ? null : metric.id)}
-              whileHover={{ y: -4 }}
-              whileTap={{ scale: 0.98 }}
             >
               <CardContent className="p-6">
                 <div className="flex items-start justify-between mb-4">
