@@ -17,47 +17,16 @@ export function SplashScreen({ onComplete, isReturning = false }: SplashScreenPr
     const loadAssets = async () => {
       const steps = isReturning ? [
         { progress: 30, text: "Reloading assets..." },
-        { progress: 60, text: "Preparing 3D scene..." },
+        { progress: 60, text: "Preparing hero animation..." },
         { progress: 80, text: "Optimizing content..." },
         { progress: 100, text: "Ready!" }
       ] : [
         { progress: 20, text: "Loading assets..." },
-        { progress: 40, text: "Preparing 3D scene..." },
+        { progress: 40, text: "Preparing hero animation..." },
         { progress: 60, text: "Optimizing images..." },
         { progress: 80, text: "Finalizing experience..." },
         { progress: 100, text: "Ready!" }
       ];
-
-      // Preload critical images
-      const preloadImages = async () => {
-        const imageUrls = [
-          '/assets/scene.splinecode', // Spline scene
-          // Add other critical images here
-        ];
-
-        const imagePromises = imageUrls.map(url => {
-          return new Promise((resolve, reject) => {
-            if (url.endsWith('.splinecode')) {
-              // For Spline scenes, just resolve after a delay
-              setTimeout(resolve, 1000);
-            } else {
-              const img = new Image();
-              img.onload = resolve;
-              img.onerror = reject;
-              img.src = url;
-            }
-          });
-        });
-
-        try {
-          await Promise.all(imagePromises);
-        } catch (error) {
-          console.warn('Some assets failed to preload:', error);
-        }
-      };
-
-      // Start preloading
-      void preloadImages();
 
       for (const step of steps) {
         setLoadingProgress(step.progress);

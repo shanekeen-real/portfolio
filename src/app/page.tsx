@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, Suspense, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "@/styles/Home.module.css";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,16 +12,6 @@ import {
   MonitorSmartphone,
 } from "lucide-react";
 import { TriangleDownIcon } from "@radix-ui/react-icons";
-import dynamic from "next/dynamic";
-
-const Spline = dynamic(() => import("@splinetool/react-spline"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex items-center justify-center h-full w-full">
-      <div className="text-muted-foreground">Loading 3D scene...</div>
-    </div>
-  ),
-});
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -33,6 +23,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Counter } from "@/components/ui/counter";
 import { CustomCursor } from "@/components/CustomCursor";
+import { HeroLottie } from "@/components/HeroLottie";
 
 const aboutStats = [
   { label: "Years of experience", value: 7, suffix: "+" },
@@ -204,9 +195,7 @@ export default function Home() {
           id={styles["canvas-container"]}
           className="mt-14 h-full w-full xl:mt-0"
         >
-          <Suspense fallback={<span>Loading...</span>}>
-            <Spline scene="/assets/scene.splinecode" />
-          </Suspense>
+          <HeroLottie />
         </div>
       </section>
 
@@ -219,7 +208,7 @@ export default function Home() {
           className="my-14 flex max-w-6xl flex-col justify-start space-y-10"
         >
           <TextGradientScroll 
-            text="I'm a UI/UX designer and full-stack developer with over 5 years of experience creating digital products that users love. I specialize in user-centered design and modern web development, working with companies from startups to enterprise to bring their ideas to life through thoughtful design and clean code."
+            text="I’m a digital designer who blends UI/UX, visual design, and front-end knowledge to solve real-world problems, creating user-centred digital experiences that are both visually polished and technically practical."
             className="py-16 pb-2 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]"
             type="letter"
             textOpacity="soft"
