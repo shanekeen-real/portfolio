@@ -84,7 +84,6 @@ export default function ProjectPage({ params }: ProjectPageProps) {
     return (
       <PasswordProtection 
         onUnlock={() => setIsUnlocked(true)}
-        externalLink={project.externalLink}
         project="yellow-dollar"
       />
     );

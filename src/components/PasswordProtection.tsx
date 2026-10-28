@@ -3,15 +3,14 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Lock, ExternalLink, Eye, EyeOff } from "lucide-react";
+import { Lock, Eye, EyeOff } from "lucide-react";
 
 interface PasswordProtectionProps {
   onUnlock: () => void;
-  externalLink?: string;
   project: string;
 }
 
-export function PasswordProtection({ onUnlock, externalLink, project }: PasswordProtectionProps) {
+export function PasswordProtection({ onUnlock, project }: PasswordProtectionProps) {
   const [password, setPassword] = useState("");
   const [isIncorrect, setIsIncorrect] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -105,7 +104,7 @@ export function PasswordProtection({ onUnlock, externalLink, project }: Password
                 )}
               </div>
               
-              <div className="space-y-3 pt-2">
+              <div className="pt-2">
                 <Button 
                   type="submit" 
                   disabled={isLoading}
@@ -113,18 +112,6 @@ export function PasswordProtection({ onUnlock, externalLink, project }: Password
                 >
                   {isLoading ? "Verifying..." : "View Case Study"}
                 </Button>
-                
-                {externalLink && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="w-full h-12 text-base font-medium rounded-xl border-2 hover:bg-muted/50 transition-all duration-200"
-                    onClick={() => window.open(externalLink, '_blank')}
-                  >
-                    <ExternalLink className="w-5 h-5 mr-2" />
-                    View Live Website
-                  </Button>
-                )}
               </div>
             </form>
           </CardContent>
