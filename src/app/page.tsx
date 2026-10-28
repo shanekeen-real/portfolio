@@ -273,7 +273,7 @@ export default function Home() {
             ✨ Featured Projects
           </span>
                      <h2 className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
-             Case studies.
+             Case studies
            </h2>
 
 
