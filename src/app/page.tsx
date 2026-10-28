@@ -157,7 +157,7 @@ export default function Home() {
               data-scroll-speed=".06"
               className="mt-1 max-w-lg tracking-tight text-muted-foreground 2xl:text-xl"
             >
-              A UI/UX designer passionate about creating intuitive digital experiences that solve real problems.
+              A visual designer interested in creating intuitive digital experiences that solve real problems.
             </p>
           </div>
           <span
