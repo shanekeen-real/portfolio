@@ -121,7 +121,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               </Button>
             </Link>
             
-            {project.externalLink && (
+            {project.externalLink && project.slug !== "yellow-dollar" && (
               <Link href={project.externalLink} target="_blank" passHref>
                 <Button 
                   variant="ghost" 

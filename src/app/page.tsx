@@ -123,7 +123,7 @@ export default function Home() {
       <section
         id="home"
         data-scroll-section
-        className="mt-40 flex w-full flex-col items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
+        className="mt-32 flex w-full flex-col items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
       >
         <div className={styles.intro}>
           <div
@@ -193,7 +193,7 @@ export default function Home() {
           data-scroll
           data-scroll-speed="-.01"
           id={styles["canvas-container"]}
-          className="mt-14 h-full w-full xl:mt-0"
+          className="mt-12 h-full w-full xl:mt-0"
         >
           <HeroLottie />
         </div>
@@ -205,11 +205,11 @@ export default function Home() {
           data-scroll
           data-scroll-speed=".4"
           data-scroll-position="top"
-          className="my-14 flex max-w-6xl flex-col justify-start space-y-10"
+          className="my-12 flex max-w-6xl flex-col justify-start space-y-8"
         >
           <TextGradientScroll 
             text="I’m a digital designer who blends UI/UX, visual design, and front-end knowledge to solve real-world problems, creating user-centred digital experiences that are both visually polished and technically practical."
-            className="py-16 pb-2 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]"
+            className="py-14 pb-2 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]"
             type="letter"
             textOpacity="soft"
           />
@@ -268,7 +268,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <div data-scroll data-scroll-speed=".4" className="my-64">
+        <div data-scroll data-scroll-speed=".4" className="my-52">
           <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
             ✨ Featured Projects
           </span>
@@ -278,7 +278,7 @@ export default function Home() {
 
 
                      {/* Projects Grid */}
-           <div className="mt-14">
+           <div className="mt-12">
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                {getFeaturedProjects().map((project) => (
                  <ProjectCard key={project.title} project={project} />
@@ -287,7 +287,7 @@ export default function Home() {
              
              {/* View All Case Studies Button */}
              <motion.div 
-               className="mt-12 flex justify-center"
+               className="mt-10 flex justify-center"
                initial={{ opacity: 0, y: 20 }}
                whileInView={{ opacity: 1, y: 0 }}
                viewport={{ once: true, margin: "-100px" }}
@@ -325,7 +325,7 @@ export default function Home() {
           data-scroll
           data-scroll-speed=".4"
           data-scroll-position="top"
-          className="my-24 flex flex-col justify-start space-y-10"
+          className="my-20 flex flex-col justify-start space-y-8"
         >
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -335,9 +335,9 @@ export default function Home() {
               staggerChildren: 0.5,
             }}
             viewport={{ once: true }}
-            className="grid items-center gap-1.5 md:grid-cols-2 xl:grid-cols-3"
+            className="grid items-stretch gap-6 md:grid-cols-2 xl:grid-cols-3"
           >
-            <div className="flex flex-col py-6 xl:p-6">
+            <div className="flex h-full flex-col items-center justify-center py-6 text-center xl:p-6">
               <h2 className="text-4xl font-medium tracking-tight">
                 What I do.
                 <br />
@@ -345,10 +345,6 @@ export default function Home() {
                   How I can help.
                 </span>
               </h2>
-              <p className="mt-2 tracking-tighter text-muted-foreground">
-                I offer a comprehensive range of design and development services
-                to help bring your ideas to life. Here&apos;s what I specialize in.
-              </p>
             </div>
             {services.map((service) => (
               <div
@@ -369,12 +365,12 @@ export default function Home() {
       </section>
 
       {/* Contact */}
-      <section id="contact" data-scroll-section className="my-64">
+      <section id="contact" data-scroll-section className="my-52">
         <div
           data-scroll
           data-scroll-speed=".4"
           data-scroll-position="top"
-          className="flex flex-col items-center justify-center rounded-lg bg-gradient-to-br from-primary/[6.5%] to-white/5 px-8 py-16 text-center xl:py-24"
+          className="flex flex-col items-center justify-center rounded-lg bg-gradient-to-br from-primary/[6.5%] to-white/5 px-8 py-14 text-center xl:py-20"
         >
           <h2 className="text-4xl font-medium tracking-tighter xl:text-6xl">
             <span className="clash-grotesk">Let&apos;s work</span>{" "}
