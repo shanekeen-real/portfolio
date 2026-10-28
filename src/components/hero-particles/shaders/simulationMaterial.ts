@@ -1,3 +1,4 @@
+
 import * as THREE from "three";
 import { extend } from "@react-three/fiber";
 
@@ -7,15 +8,13 @@ function getPoint(
   data: Float32Array,
   offset: number,
 ) {
-  // three types `Vector4#set` with a required `w`, but this deliberately sets only
-  // three components (leaving `w` undefined), so the signature is narrowed here.
-  const setXYZ = v.set as unknown as (x: number, y: number, z: number) => void;
-  setXYZ.call(
-    v,
+  v.set(
     Math.random() * 2 - 1,
     Math.random() * 2 - 1,
     Math.random() * 2 - 1,
+    0,
   );
+
   if (v.length() > 1) return getPoint(v, size, data, offset);
   return v.normalize().multiplyScalar(size).toArray(data, offset);
 }
