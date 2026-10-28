@@ -3,13 +3,60 @@
 .intro {
     @apply flex flex-col items-start space-y-4 w-full;
 }
+.hero {
+    min-height: max(38rem, calc(100svh - 10rem));
+}
+.heroSignal {
+    position: absolute;
+    z-index: 0;
+    inset: -4rem -8vw;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0.78;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 24%, #000 88%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 24%, #000 88%, transparent 100%);
+}
+.heroSignalGlow {
+    position: absolute;
+    inset: 4% 0 0 26%;
+    background:
+        radial-gradient(ellipse at 68% 48%, hsl(var(--primary) / 0.13), transparent 34%),
+        radial-gradient(ellipse at 57% 54%, hsl(var(--secondary) / 0.1), transparent 52%);
+    filter: blur(28px);
+}
+.heroSignalArtwork {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+.heroSignalOrbit {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: signal-orbit 90s linear infinite;
+}
+.heroSignalHalo {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: signal-breathe 9s ease-in-out infinite;
+}
+.heroSignalCore {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: signal-float 7s ease-in-out infinite;
+}
+.heroSignalParticleOne {
+    animation: signal-twinkle 4s ease-in-out infinite;
+}
+.heroSignalParticleTwo {
+    animation: signal-twinkle 5.5s ease-in-out 1s infinite;
+}
+.heroSignalParticleThree {
+    animation: signal-twinkle 4.8s ease-in-out 2s infinite;
+}
 .pill {
     @apply transition border border-input bg-background flex items-center text-xs px-2.5 py-1.5 rounded-full hover:-translate-y-1 hover:bg-primary hover:text-primary-foreground duration-300;
 }
-.intro h1 {
-    @apply pt-2 leading-tight;
-}
-
 /* scroll down */
 .scroll {
     @apply transition duration-300 absolute bottom-6 left-1/2 mb-8 hidden -translate-x-1/2 transform-gpu flex-col items-center text-sm text-slate-400 xl:flex tracking-tight;
@@ -23,11 +70,79 @@
     @apply p-14 bg-white/[1%] rounded-md;
 }
 
-/* spline canvas */
-#canvas-container
-{
-    @apply bg-background border rounded-3xl h-[515px] xl:w-[690px] xl:min-w-[690px] overflow-hidden;
+@keyframes signal-orbit {
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes signal-breathe {
+    0%, 100% {
+        opacity: 0.7;
+        transform: scale(0.96);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.04);
+    }
+}
+@keyframes signal-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+@keyframes signal-twinkle {
+    0%, 100% {
+        opacity: 0.35;
+    }
+    50% {
+        opacity: 1;
+    }
+}
 
-    /* this fixes the overflow:hidden in Chrome/Opera */
-    -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+@media (min-width: 1280px) {
+    .hero {
+        min-height: min(56rem, calc(100svh - 5rem));
+    }
+    .intro {
+        max-width: 58%;
+        padding-right: 2rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero {
+        min-height: max(38rem, calc(100svh - 9rem));
+    }
+    .heroSignal {
+        inset: 0 -38vw -2rem 0;
+        opacity: 0.58;
+        -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 34%, #000 88%, transparent 100%);
+        mask-image: linear-gradient(180deg, transparent 0%, #000 34%, #000 88%, transparent 100%);
+    }
+    .heroSignalGlow {
+        inset: 24% -12% 0 10%;
+    }
+    .heroSignalArtwork {
+        inset: auto auto 0 -22%;
+        width: 110%;
+        height: auto;
+    }
+    .intro {
+        padding-bottom: 4rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .heroSignalOrbit,
+    .heroSignalHalo,
+    .heroSignalCore,
+    .heroSignalParticleOne,
+    .heroSignalParticleTwo,
+    .heroSignalParticleThree {
+        animation: none;
+        transition: none;
+    }
 }

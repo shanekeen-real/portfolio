@@ -23,7 +23,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Counter } from "@/components/ui/counter";
 import { CustomCursor } from "@/components/CustomCursor";
-import { HeroLottie } from "@/components/HeroLottie";
+import { HeroSignal } from "@/components/HeroSignal";
 
 const aboutStats = [
   { label: "Years of experience", value: 7, suffix: "+" },
@@ -123,48 +123,45 @@ export default function Home() {
       <section
         id="home"
         data-scroll-section
-        className="mt-32 flex w-full flex-col items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
+        className={cn(
+          styles.hero,
+          "relative isolate mt-28 flex w-full items-center overflow-hidden xl:mt-0",
+        )}
       >
-        <div className={styles.intro}>
+        <HeroSignal />
+        <div className={cn(styles.intro, "relative z-10 py-20 xl:py-0")}>
           <div
-            data-scroll
-            data-scroll-direction="horizontal"
-            data-scroll-speed=".09"
-            className="flex flex-row items-center space-x-1.5"
+            className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.68rem] font-medium uppercase tracking-[0.18em] text-muted-foreground"
           >
-            <span className={styles.pill}>UI/UX Design</span>
-            <span className={styles.pill}>Product Design</span>
-            <span className={styles.pill}>Frontend Dev</span>
+            <span className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.7)]" />
+              UI/UX Design
+            </span>
+            <span aria-hidden="true" className="text-primary/60">/</span>
+            <span>Product Design</span>
+            <span aria-hidden="true" className="text-primary/60">/</span>
+            <span>Frontend</span>
           </div>
           <div>
             <h1
-              data-scroll
-              data-scroll-enable-touch-speed
-              data-scroll-speed=".06"
-              data-scroll-direction="horizontal"
+              className="pt-2 leading-[0.94] tracking-[-0.075em]"
             >
-              <span className="text-6xl tracking-tighter text-foreground 2xl:text-8xl">
-                Hello, I&apos;m
+              <span className="block text-[clamp(3.75rem,8vw,7.5rem)] text-foreground">
+                Design with
                 <br />
               </span>
-              <span className="clash-grotesk text-gradient text-6xl 2xl:text-8xl">
-                Shane.
+              <span className="clash-grotesk text-gradient block text-[clamp(4.5rem,10vw,9rem)]">
+                intention.
               </span>
             </h1>
             <p
-              data-scroll
-              data-scroll-enable-touch-speed
-              data-scroll-speed=".06"
-              className="mt-1 max-w-lg tracking-tight text-muted-foreground 2xl:text-xl"
+              className="mt-6 max-w-xl text-base leading-relaxed tracking-tight text-muted-foreground sm:text-lg xl:text-xl"
             >
-              A visual designer interested in creating intuitive digital experiences that solve real problems.
+              I&apos;m Shane, a designer and developer creating clear, thoughtful digital experiences for people and the problems they face.
             </p>
           </div>
           <span
-            data-scroll
-            data-scroll-enable-touch-speed
-            data-scroll-speed=".06"
-            className="flex flex-row items-center space-x-1.5 pt-6"
+            className="flex flex-row items-center gap-3 pt-2"
           >
             <Link href="mailto:contact@shane.technology" passHref>
               <Button>
@@ -179,23 +176,15 @@ export default function Home() {
             </Button>
           </span>
 
-          <div
-            className={cn(
-              styles.scroll,
-              isScrolled && styles["scroll--hidden"],
-            )}
-          >
-            Scroll to discover{" "}
-            <TriangleDownIcon className="mt-1 animate-bounce" />
-          </div>
         </div>
         <div
-          data-scroll
-          data-scroll-speed="-.01"
-          id={styles["canvas-container"]}
-          className="mt-12 h-full w-full xl:mt-0"
+          className={cn(
+            styles.scroll,
+            isScrolled && styles["scroll--hidden"],
+          )}
         >
-          <HeroLottie />
+          <span>Scroll to discover</span>
+          <TriangleDownIcon className="mt-1 animate-bounce motion-reduce:animate-none" />
         </div>
       </section>
 
