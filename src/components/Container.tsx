@@ -256,7 +256,7 @@ function MenuIcon(props: IconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute h-5 w-5 text-neutral-100"
+      className="absolute h-5 w-5 text-foreground"
       width="20"
       height="20"
       viewBox="0 0 20 20"
@@ -291,7 +291,7 @@ function MenuIcon(props: IconProps) {
 function CrossIcon(props: IconProps) {
   return (
     <svg
-      className="absolute h-5 w-5 text-neutral-100"
+      className="absolute h-5 w-5 text-foreground"
       viewBox="0 0 24 24"
       width="24"
       height="24"

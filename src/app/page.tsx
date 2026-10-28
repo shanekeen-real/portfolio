@@ -130,27 +130,27 @@ export default function Home() {
       >
         <HeroSignal />
         <div className={cn(styles.intro, "relative z-10 py-20 xl:py-0")}>
-          <div
-            className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.68rem] font-medium uppercase tracking-[0.18em] text-muted-foreground"
-          >
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-[0.62rem] font-medium uppercase tracking-[0.14em] text-muted-foreground sm:gap-x-3 sm:text-[0.68rem] sm:tracking-[0.18em]">
             <span className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.7)]" />
               UI/UX Design
             </span>
-            <span aria-hidden="true" className="text-primary/60">/</span>
-            <span>Product Design</span>
-            <span aria-hidden="true" className="text-primary/60">/</span>
-            <span>Frontend</span>
+            <span className="before:mr-2 before:text-primary/60 before:content-['·'] sm:before:mr-3">
+              Product Design
+            </span>
+            <span className="before:mr-2 before:text-primary/60 before:content-['·'] sm:before:mr-3">
+              Frontend
+            </span>
           </div>
           <div>
             <h1
               className="pt-2 leading-[0.94] tracking-[-0.075em]"
             >
-              <span className="block text-[clamp(3.75rem,8vw,7.5rem)] text-foreground">
+              <span className="block text-[clamp(3rem,8vw,7.5rem)] text-foreground">
                 Design with
                 <br />
               </span>
-              <span className="clash-grotesk text-gradient block text-[clamp(4.5rem,10vw,9rem)]">
+              <span className="clash-grotesk text-gradient block text-[clamp(3.75rem,10vw,9rem)]">
                 intention.
               </span>
             </h1>
@@ -161,7 +161,7 @@ export default function Home() {
             </p>
           </div>
           <span
-            className="flex flex-row items-center gap-3 pt-2"
+            className="flex flex-row items-center gap-1 pt-2 min-[360px]:gap-3"
           >
             <Link href="mailto:contact@shane.technology" passHref>
               <Button>
@@ -189,16 +189,16 @@ export default function Home() {
       </section>
 
       {/* About */}
-      <section id="about" data-scroll-section>
+      <section id="about" data-scroll-section className="py-12 md:py-14 xl:py-16">
         <div
           data-scroll
           data-scroll-speed=".4"
           data-scroll-position="top"
-          className="my-12 flex max-w-6xl flex-col justify-start space-y-8"
+          className="flex max-w-6xl flex-col justify-start space-y-8"
         >
           <TextGradientScroll 
             text="I’m a digital designer who blends UI/UX, visual design, and front-end knowledge to solve real-world problems, creating user-centred digital experiences that are both visually polished and technically practical."
-            className="py-14 pb-2 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]"
+            className="py-0 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]"
             type="letter"
             textOpacity="soft"
           />
@@ -241,7 +241,7 @@ export default function Home() {
       </section>
 
       {/* Projects */}
-      <section id="projects" data-scroll-section>
+      <section id="projects" data-scroll-section className="py-12 md:py-14 xl:py-16">
         {/* Gradient */}
         <div className="relative isolate -z-10">
           <div
@@ -257,7 +257,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <div data-scroll data-scroll-speed=".4" className="my-52">
+        <div data-scroll data-scroll-speed=".4">
           <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
             ✨ Featured Projects
           </span>
@@ -294,7 +294,7 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section id="services" data-scroll-section>
+      <section id="services" data-scroll-section className="py-12 md:py-14 xl:py-16">
         {/* Background Blob */}
         <div className="relative isolate -z-10">
           <div
@@ -314,7 +314,7 @@ export default function Home() {
           data-scroll
           data-scroll-speed=".4"
           data-scroll-position="top"
-          className="my-20 flex flex-col justify-start space-y-8"
+          className="flex flex-col justify-start space-y-8"
         >
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -354,11 +354,8 @@ export default function Home() {
       </section>
 
       {/* Contact */}
-      <section id="contact" data-scroll-section className="my-52">
+      <section id="contact" data-scroll-section className="py-12 md:py-14 xl:py-16">
         <div
-          data-scroll
-          data-scroll-speed=".4"
-          data-scroll-position="top"
           className="flex flex-col items-center justify-center rounded-lg bg-gradient-to-br from-primary/[6.5%] to-white/5 px-8 py-14 text-center xl:py-20"
         >
           <h2 className="text-4xl font-medium tracking-tighter xl:text-6xl">

@@ -4,6 +4,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (min-width: 800px) {
+  html:has(#home) {
+    overflow-x: clip;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1399.98px) {
+  main:has(#home) {
+    --page-gutter: clamp(1.5rem, 2.5vw, 2rem);
+    padding-inline: var(--page-gutter);
+  }
+}
+
 @layer base {
   :root {
     --background: 222 84% 4.9%;
